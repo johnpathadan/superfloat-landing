@@ -3,7 +3,7 @@ import { Figtree, Fraunces } from "next/font/google";
 
 import { Flo, Icon, Shell, Thumb, Water } from "./_landing/art";
 import { HeroSea } from "./_landing/hero-sea";
-import { WaitlistForm } from "./_landing/waitlist-form";
+import { WaitlistButton } from "./_landing/waitlist-button";
 import s from "./_landing/landing.module.css";
 import type { IconName } from "./_landing/icons";
 
@@ -30,6 +30,11 @@ const METHODS: { icon: IconName; label: string }[] = [
   { icon: "bank", label: "Bank transfer" },
   { icon: "phone", label: "Apple Pay" },
   { icon: "coin", label: "Coinbase balance" },
+];
+
+const PRICES = [
+  { kind: "Payments between people", figure: "Free", body: "Pay or request USDC from your connections at no charge.", fee: false },
+  { kind: "Tips and subscriptions", figure: "1.5%", body: "On each tip and subscription payment to a tips page or community page.", fee: true },
 ];
 
 function Wordmark({ light }: { light?: boolean }) {
@@ -97,12 +102,13 @@ export default function Home() {
             <a href="#how">How it works</a>
             <a href="#communities">Communities</a>
             <a href="#wallets">Wallets</a>
+            <a href="#pricing">Pricing</a>
           </nav>
         </header>
         <div className={s.heroCopy}>
           <h1 id="hero-title">Send USDC to anyone by their <em>@name</em>.</h1>
           <p>Superfloat is a social app on Base. Pay your friends, tip the people you follow and back the communities you love.</p>
-          <WaitlistForm source="hero" />
+          <WaitlistButton source="hero" />
         </div>
         <HeroSea />
       </section>
@@ -203,14 +209,32 @@ export default function Home() {
             </ul>
           </div>
         </section>
+
+        <section id="pricing" className={s.pricing} aria-labelledby="pricing-title">
+          <div className={s.pricingInner}>
+            <div>
+              <h2 id="pricing-title" className={s.h2}>Free between friends.</h2>
+              <p className={s.lead}>Superfloat only charges when fans back the people and communities they love.</p>
+            </div>
+            <ul className={s.prices}>
+              {PRICES.map((p) => (
+                <li key={p.kind} className={`${s.price} ${p.fee ? s.priceFee : ""}`}>
+                  <span className={s.priceKind}>{p.kind}</span>
+                  <strong className={s.priceFigure}>{p.figure}</strong>
+                  <span className={s.priceBody}>{p.body}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       </main>
 
       <footer className={s.close}>
         <span className={s.moon} />
         <div className={s.closeCopy}>
-          <h2>A billion people on-chain</h2>
+          <h2>Made to support creators</h2>
           <p className={s.soon}>Coming soon to iOS and Android. Join the waitlist to hear first.</p>
-          <WaitlistForm source="footer" night />
+          <WaitlistButton source="footer" />
         </div>
         <Water
           className={s.closeWater}

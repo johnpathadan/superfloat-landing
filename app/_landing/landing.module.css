@@ -483,7 +483,8 @@
 .howInner,
 .communityInner,
 .socialInner,
-.moneyInner {
+.moneyInner,
+.pricingInner {
   display: grid;
   width: min(100% - 2.5rem, 72rem);
   margin: 0 auto;
@@ -1052,6 +1053,69 @@
   color: #ffb877;
 }
 
+/* ── Pricing ── */
+.pricing {
+  padding: clamp(5rem, 11vw, 9rem) 0;
+  background: var(--sand);
+  color: var(--ink);
+}
+
+.pricing .lead {
+  color: #3e5a5e;
+}
+
+.prices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.price {
+  display: flex;
+  padding: 1.75rem 1.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  background: #fff8ea;
+  box-shadow: inset 0 0 0 2px rgba(16, 40, 44, 0.08);
+}
+
+.priceKind {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.priceFigure {
+  font-family: var(--display);
+  font-size: clamp(3rem, 6vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
+  color: var(--water-front);
+}
+
+.priceBody {
+  color: #3e5a5e;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.priceFee {
+  background: var(--deep);
+  box-shadow: none;
+  color: var(--foam);
+}
+
+.priceFee .priceFigure {
+  color: #ffb877;
+}
+
+.priceFee .priceBody {
+  color: var(--mist);
+}
+
 /* ── Close ── */
 .close {
   position: relative;
@@ -1129,84 +1193,144 @@
 }
 
 /* ── Waitlist ── */
-.waitlist {
-  max-width: 32rem;
+.waitOpen {
   margin-top: 1.75rem;
 }
 
-.waitRow {
+.btnGhost {
+  min-height: 3.25rem;
+  padding: 0.75rem 1.375rem;
+  border: 2px solid rgba(16, 40, 44, 0.16);
+  border-radius: 1rem;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btnGhost:hover {
+  border-color: rgba(16, 40, 44, 0.4);
+}
+
+/* The dialog sits inside the hero and footer copy, so it restates its own type
+   rather than picking up their heading and paragraph styles. */
+.waitDialog {
+  width: min(100% - 2rem, 28rem);
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 1.5rem;
+  background: var(--foam);
+  color: var(--ink);
+  box-shadow: 0 1.5rem 4rem rgba(4, 34, 42, 0.35);
+  font-family: var(--body);
+}
+
+.waitDialog::backdrop {
+  background: rgba(4, 34, 42, 0.6);
+}
+
+.waitDialog[open] {
+  animation: waitIn 0.32s var(--snap);
+}
+
+@keyframes waitIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.98);
+  }
+}
+
+.waitBody {
   display: flex;
-  gap: 0.625rem;
+  padding: 1.75rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.waitDialog .waitTitle {
+  max-width: none;
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 48;
+}
+
+.waitDialog .waitText {
+  max-width: none;
+  margin: -0.25rem 0 0.25rem;
+  color: #3e5a5e;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.waitField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.waitField small {
+  color: #5b7478;
+  font-size: 0.8125rem;
+  font-weight: 500;
 }
 
 .waitInput {
-  min-width: 0;
   min-height: 3.25rem;
-  flex: 1;
-  padding: 0.75rem 1.125rem;
-  border: 2px solid rgba(43, 18, 10, 0.18);
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(16, 40, 44, 0.16);
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.6);
-  color: var(--dusk-ink);
+  background: #fff;
+  color: var(--ink);
   font: inherit;
   font-size: 1rem;
   font-weight: 500;
 }
 
 .waitInput::placeholder {
-  color: rgba(43, 18, 10, 0.5);
+  color: #7d9195;
 }
 
 .waitInput:focus-visible {
-  border-color: var(--dusk-ink);
+  border-color: var(--water-front);
   outline: none;
 }
 
-.waitlist .btnBuoy {
-  flex-shrink: 0;
+.waitDialog .waitHint {
+  font-weight: 400;
 }
 
-.waitlist .btnBuoy:disabled {
+.waitError {
+  color: #b3261e;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.waitButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.625rem;
+  margin-top: 0.5rem;
+}
+
+.waitButtons button:disabled {
   cursor: progress;
   opacity: 0.7;
   transform: none;
 }
 
-.waitDone {
-  display: inline-block;
-  padding: 0.875rem 1.125rem;
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.6);
-  font-weight: 600;
-}
-
-.waitError {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-.waitlistNight .waitInput {
-  border-color: rgba(247, 242, 230, 0.28);
-  background: rgba(247, 242, 230, 0.1);
-  color: #f7f2e6;
-}
-
-.waitlistNight .waitInput::placeholder {
-  color: rgba(247, 242, 230, 0.6);
-}
-
-.waitlistNight .waitInput:focus-visible {
-  border-color: #f7f2e6;
-}
-
-.waitlistNight .waitDone {
-  background: rgba(247, 242, 230, 0.12);
-}
-
-.waitlistNight .waitError {
-  color: #ffc9b5;
+.waitDialog button:focus-visible {
+  outline-color: var(--ink);
 }
 
 .srOnly {
@@ -1223,7 +1347,8 @@
   .howInner,
   .communityInner,
   .socialInner,
-  .moneyInner {
+  .moneyInner,
+  .pricingInner {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1288,8 +1413,16 @@
     flex: 1;
   }
 
-  .waitRow {
-    flex-direction: column;
+  .prices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .waitBody {
+    padding: 1.375rem;
+  }
+
+  .waitButtons {
+    flex-direction: column-reverse;
   }
 }
 
@@ -1302,7 +1435,8 @@
   .zed,
   .waveBack,
   .waveFront,
-  .bubbles i {
+  .bubbles i,
+  .waitDialog[open] {
     animation: none;
   }
 

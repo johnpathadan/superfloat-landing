@@ -12,7 +12,9 @@ export async function joinWaitlist(_prev: WaitlistState, form: FormData): Promis
 
   const email = String(form.get("email") ?? "").trim().toLowerCase();
   const source = String(form.get("source") ?? "").slice(0, 40) || null;
+  const platforms = String(form.get("platforms") ?? "").replace(/\s+/g, " ").trim() || null;
   if (email.length > 254 || !EMAIL.test(email)) return { status: "error", message: "Please enter a valid email address." };
+  if (platforms && platforms.length > 300) return { status: "error", message: "Please keep the platforms under 300 characters." };
 
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_PUBLISHABLE_KEY;
@@ -25,7 +27,7 @@ export async function joinWaitlist(_prev: WaitlistState, form: FormData): Promis
     const res = await fetch(`${url}/rest/v1/waitlist`, {
       method: "POST",
       headers: { apikey: key, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ email, source }),
+      body: JSON.stringify({ email, source, platforms }),
       cache: "no-store",
     });
     if (res.ok) return { status: "joined" };
