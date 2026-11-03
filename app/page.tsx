@@ -3,6 +3,7 @@ import { Figtree, Fraunces } from "next/font/google";
 
 import { Flo, Icon, Shell, Thumb, Water } from "./_landing/art";
 import { HeroSea } from "./_landing/hero-sea";
+import { WaitlistForm } from "./_landing/waitlist-form";
 import s from "./_landing/landing.module.css";
 import type { IconName } from "./_landing/icons";
 
@@ -101,6 +102,7 @@ export default function Home() {
         <div className={s.heroCopy}>
           <h1 id="hero-title">Send USDC to anyone by their <em>@name</em>.</h1>
           <p>Superfloat is a social app on Base. Pay your friends, tip the people you follow and back the communities you love.</p>
+          <WaitlistForm source="hero" />
         </div>
         <HeroSea />
       </section>
@@ -207,7 +209,8 @@ export default function Home() {
         <span className={s.moon} />
         <div className={s.closeCopy}>
           <h2>A billion people on-chain</h2>
-          <p className={s.soon}>Coming soon to iOS and Android</p>
+          <p className={s.soon}>Coming soon to iOS and Android. Join the waitlist to hear first.</p>
+          <WaitlistForm source="footer" night />
         </div>
         <Water
           className={s.closeWater}

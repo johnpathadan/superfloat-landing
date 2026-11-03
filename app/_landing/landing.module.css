@@ -1128,6 +1128,96 @@
   font-weight: 500;
 }
 
+/* ── Waitlist ── */
+.waitlist {
+  max-width: 32rem;
+  margin-top: 1.75rem;
+}
+
+.waitRow {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.waitInput {
+  min-width: 0;
+  min-height: 3.25rem;
+  flex: 1;
+  padding: 0.75rem 1.125rem;
+  border: 2px solid rgba(43, 18, 10, 0.18);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--dusk-ink);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.waitInput::placeholder {
+  color: rgba(43, 18, 10, 0.5);
+}
+
+.waitInput:focus-visible {
+  border-color: var(--dusk-ink);
+  outline: none;
+}
+
+.waitlist .btnBuoy {
+  flex-shrink: 0;
+}
+
+.waitlist .btnBuoy:disabled {
+  cursor: progress;
+  opacity: 0.7;
+  transform: none;
+}
+
+.waitDone {
+  display: inline-block;
+  padding: 0.875rem 1.125rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+}
+
+.waitError {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.waitlistNight .waitInput {
+  border-color: rgba(247, 242, 230, 0.28);
+  background: rgba(247, 242, 230, 0.1);
+  color: #f7f2e6;
+}
+
+.waitlistNight .waitInput::placeholder {
+  color: rgba(247, 242, 230, 0.6);
+}
+
+.waitlistNight .waitInput:focus-visible {
+  border-color: #f7f2e6;
+}
+
+.waitlistNight .waitDone {
+  background: rgba(247, 242, 230, 0.12);
+}
+
+.waitlistNight .waitError {
+  color: #ffc9b5;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ── Smaller screens ── */
 @media (max-width: 56rem) {
   .howInner,
@@ -1196,6 +1286,10 @@
 
   .seaActions button {
     flex: 1;
+  }
+
+  .waitRow {
+    flex-direction: column;
   }
 }
 
