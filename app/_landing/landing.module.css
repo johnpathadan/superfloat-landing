@@ -1234,6 +1234,206 @@
   font-size: 0.875rem;
 }
 
+/* ── How it works page ── */
+.subHero {
+  position: relative;
+  padding-bottom: 10rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffc389 0%, #ff9c72 60%, #ff8a66 100%);
+  color: var(--dusk-ink);
+}
+
+.subWater {
+  height: 5rem;
+}
+
+.subFlo {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--flo-w) * -0.35);
+  right: clamp(1rem, 12vw, 13rem);
+  width: var(--flo-w);
+  --flo-w: clamp(9rem, 16vw, 14rem);
+}
+
+.journey,
+.faq {
+  padding: clamp(5rem, 11vw, 9rem) 0;
+  background: var(--deep);
+}
+
+.flow {
+  display: grid;
+  margin-top: 2.5rem !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.75rem;
+  list-style: none;
+}
+
+.flow li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 1.5rem;
+  background: var(--tide);
+}
+
+/* A chevron in the gap, pointing at the next step. */
+.flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1.125rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-top: 2.5px solid #ffb877;
+  border-right: 2.5px solid #ffb877;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.flow .icon {
+  margin-bottom: 0.5rem;
+  color: #ffb877;
+}
+
+.flow strong {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.flow span {
+  color: #c2dcd7;
+  font-size: 1rem;
+}
+
+.pieces {
+  padding: clamp(5rem, 11vw, 9rem) 0;
+  background: var(--sand);
+  color: var(--ink);
+}
+
+.pieces .lead {
+  color: #3f5a5c;
+}
+
+.pieceGrid {
+  display: grid;
+  margin-top: 2.5rem !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.pieceGrid li {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  padding: 1.75rem 1.5rem;
+  border-radius: 1.5rem;
+  background: #fff8ea;
+  box-shadow: inset 0 0 0 2px rgba(16, 40, 44, 0.08);
+}
+
+.pieceGrid .icon {
+  justify-self: start;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: content-box;
+  border-radius: 0.875rem;
+  background: var(--deep);
+  color: #ffb877;
+}
+
+.pieceGrid strong {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.15;
+  font-variation-settings: "SOFT" 100, "opsz" 40;
+}
+
+.pieceGrid span {
+  color: #3f5a5c;
+}
+
+.allow {
+  display: grid;
+  margin-top: 0.75rem !important;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.allow li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  background: var(--tide);
+  font-size: 0.9375rem;
+}
+
+.allow span {
+  color: var(--mist);
+}
+
+.allow strong {
+  font-weight: 700;
+}
+
+.faqList {
+  display: grid;
+  max-width: 48rem;
+  margin-top: 2rem;
+  gap: 0.75rem;
+}
+
+.faqList details {
+  padding: 0 1.25rem;
+  border-radius: 1.25rem;
+  background: var(--tide);
+}
+
+.faqList summary {
+  display: flex;
+  padding: 1.125rem 0;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faqList summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqList summary::after {
+  content: "+";
+  color: #ffb877;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.faqList details[open] summary::after {
+  content: "−";
+}
+
+.faqList summary:focus-visible {
+  outline: 2px solid var(--foam);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+.faqList details p {
+  padding-bottom: 1.25rem;
+  color: #c2dcd7;
+}
+
 /* ── Close ── */
 .close {
   position: relative;
@@ -1470,8 +1670,17 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .stepsRow {
+  .stepsRow,
+  .flow {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flow li:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: -1.125rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
   }
 
   .how .phone {
@@ -1498,8 +1707,17 @@
 }
 
 @media (max-width: 40rem) {
-  .nav nav {
+  .nav nav a:not(.navPage) {
     display: none;
+  }
+
+  .pieceGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .subFlo {
+    right: 0.5rem;
+    --flo-w: 8.5rem;
   }
 
   .heroSun {

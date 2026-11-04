@@ -1,15 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Fraunces } from "next/font/google";
 
 import { Flo, Icon, Shell, Thumb, Water } from "./_landing/art";
 import { HeroSea } from "./_landing/hero-sea";
 import { SavingsCalculator } from "./_landing/savings-calculator";
+import { pageClass, SiteFooter, SiteNav } from "./_landing/site";
 import { WaitlistButton } from "./_landing/waitlist-button";
 import s from "./_landing/landing.module.css";
 import type { IconName } from "./_landing/icons";
-
-const fraunces = Fraunces({ subsets: ["latin"], axes: ["SOFT", "WONK", "opsz"], variable: "--font-fraunces", display: "swap" });
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Superfloat",
@@ -43,10 +40,6 @@ const METHODS: { icon: IconName; label: string }[] = [
   { icon: "phone", label: "Apple Pay" },
   { icon: "coin", label: "Coinbase balance" },
 ];
-
-function Wordmark({ light }: { light?: boolean }) {
-  return <span className={`${s.wordmark} ${light ? s.wordmarkLight : ""}`}>superfl<i>o</i>at</span>;
-}
 
 function Row({ id, title, sub, right, note }: { id: Parameters<typeof Thumb>[0]["id"]; title: string; sub: string; right: string; note: string }) {
   return (
@@ -100,18 +93,10 @@ function SkyCard({ sky, name, kind, amount, pose }: { sky: string; name: string;
 
 export default function Home() {
   return (
-    <div className={`${s.page} ${fraunces.variable} ${figtree.variable}`}>
+    <div className={pageClass}>
       <section id="top" className={s.hero} aria-labelledby="hero-title">
         <span className={s.heroSun} />
-        <header className={s.nav}>
-          <a href="#top" aria-label="Superfloat home"><Wordmark /></a>
-          <nav aria-label="Page sections">
-            <a href="#communities">Community pages</a>
-            <a href="#savings">Fees</a>
-            <a href="#start">Get started</a>
-            <a href="#payments">Payments</a>
-          </nav>
-        </header>
+        <SiteNav />
         <div className={s.heroCopy}>
           <h1 id="hero-title">Keep more of what your <em>fans</em> give.</h1>
           <p>Superfloat gives creators a community page where fans tip and subscribe. We take 1.5%, a fraction of what most platforms keep.</p>
@@ -237,25 +222,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className={s.close}>
-        <span className={s.moon} />
-        <div className={s.closeCopy}>
-          <h2>Made to support creators</h2>
-          <p className={s.soon}>Coming soon to iOS and Android. Join the waitlist to hear first.</p>
-          <WaitlistButton source="footer" />
-        </div>
-        <Water
-          className={s.closeWater}
-          over={
-            <div className={s.foot}>
-              <Wordmark light />
-              <span>Built on Base with USDC</span>
-              <span>© {new Date().getFullYear()} Superfloat</span>
-            </div>
-          }>
-          <div className={s.closeFlo}><div className={s.bob}><Flo pose="sleep" label="Flo the otter, asleep in kelp" /></div></div>
-        </Water>
-      </footer>
+      <SiteFooter source="footer" />
     </div>
   );
 }
