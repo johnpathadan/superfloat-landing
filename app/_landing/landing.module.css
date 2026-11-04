@@ -382,13 +382,6 @@
   font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 72;
 }
 
-.seaUnit {
-  font-family: var(--body);
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
 .odo {
   display: inline-flex;
 }
@@ -569,12 +562,6 @@
   font-weight: 600;
   line-height: 1.1;
   font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 72;
-}
-
-.miniAmount small {
-  font-family: var(--body);
-  font-size: 0.8125rem;
-  font-weight: 700;
 }
 
 .miniWater {
@@ -1002,12 +989,6 @@
   font-weight: 600;
   line-height: 1.1;
   font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 72;
-}
-
-.skyAmount small {
-  font-family: var(--body);
-  font-size: 0.875rem;
-  font-weight: 700;
 }
 
 .skyWater {

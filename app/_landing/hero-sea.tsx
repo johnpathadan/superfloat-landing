@@ -12,9 +12,9 @@ const START = 100;
 // Rounded so the server and browser agree on the last float digit during hydration.
 const tide = (balance: number) => Math.round(Math.min(1, Math.log10(1 + balance) / Math.log10(1001)) * 1e4) / 1e4;
 
-/** Rolling digits. Columns are keyed from the right so 120 → 170 only rolls what changed. */
+/** Rolling digits after a dollar sign. Columns are keyed from the right so 98.50 → 147.75 only rolls what changed. */
 function Odometer({ value }: { value: number }) {
-  const chars = fmt(value).split("");
+  const chars = `$${fmt(value)}`.split("");
   return (
     <span className={s.odo} aria-hidden="true">
       {chars.map((c, i) => {
@@ -54,15 +54,14 @@ export function HeroSea() {
           ) : null}
           <div className={s.seaBar}>
             <div>
-              <p className={s.seaLabel}>When fans give you {given.toLocaleString("en-US")} USDC, you keep</p>
-              <p className={s.seaAmount} role="status" aria-label={`You keep ${fmt(kept)} USDC. Superfloat gets ${fmt(fee)} USDC.`}>
+              <p className={s.seaLabel}>When fans give you ${given.toLocaleString("en-US")}, you keep</p>
+              <p className={s.seaAmount} role="status" aria-label={`You keep $${fmt(kept)}. Superfloat gets $${fmt(fee)}.`}>
                 <Odometer value={kept} />
-                <span className={s.seaUnit}>USDC</span>
               </p>
-              <p className={s.seaFee} aria-hidden="true">Superfloat gets {fmt(fee)} USDC</p>
+              <p className={s.seaFee} aria-hidden="true">Superfloat gets ${fmt(fee)}</p>
             </div>
             <div className={s.seaActions}>
-              <button type="button" className={s.btnBuoy} disabled={given >= 1000} onClick={() => { setGiven((g) => g + 50); setBurst((n) => n + 1); }}>Fan tips 50</button>
+              <button type="button" className={s.btnBuoy} disabled={given >= 1000} onClick={() => { setGiven((g) => g + 50); setBurst((n) => n + 1); }}>Fan tips $50</button>
               <button type="button" className={s.btnFoam} disabled={given === START} onClick={() => setGiven(START)}>Start over</button>
             </div>
           </div>

@@ -13,7 +13,7 @@ const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", displa
 
 export const metadata: Metadata = {
   title: "Superfloat",
-  description: "Community pages for creators. Fans tip and subscribe in USDC on Base, and Superfloat takes just 1.5%.",
+  description: "Community pages for creators. Fans tip and subscribe in digital dollars, and Superfloat takes just 1.5%.",
 };
 
 export const viewport: Viewport = { themeColor: "#FFC389" };
@@ -60,7 +60,7 @@ function Row({ id, title, sub, right, note }: { id: Parameters<typeof Thumb>[0][
 
 function PhoneHome() {
   return (
-    <div className={s.phone} role="img" aria-label="The Superfloat home screen, showing a balance of 120 USDC and upcoming payments">
+    <div className={s.phone} role="img" aria-label="The Superfloat home screen, showing a balance of $120 and upcoming payments">
       <div className={s.phoneScreen}>
         <div className={s.phoneTop}>
           <Thumb id="me" size={36} />
@@ -69,7 +69,7 @@ function PhoneHome() {
         <div className={s.miniCard}>
           <span className={s.miniSun} />
           <span className={s.miniLabel}>Your Balance</span>
-          <span className={s.miniAmount}>120 <small>USDC</small></span>
+          <span className={s.miniAmount}>$120</span>
           <Water className={s.miniWater}><div className={s.miniFlo}><div className={s.bob}><Flo /></div></div></Water>
         </div>
         <div className={s.tiles}>
@@ -78,9 +78,9 @@ function PhoneHome() {
           ))}
         </div>
         <p className={s.phoneHead}>Your upcoming payments</p>
-        <Row id="sara" title="Sara Toast" sub="User · every month" right="45 USDC" note="Sun, 1 Nov" />
-        <Row id="lovecraft" title="The Lovecraft" sub="Community · every month" right="5 USDC" note="Wed, 4 Nov" />
-        <Row id="startup" title="Startup Podcast" sub="Community · every week" right="5 USDC" note="Fri, 6 Nov" />
+        <Row id="sara" title="Sara Toast" sub="User · every month" right="$45" note="Sun, 1 Nov" />
+        <Row id="lovecraft" title="The Lovecraft" sub="Community · every month" right="$5" note="Wed, 4 Nov" />
+        <Row id="startup" title="Startup Podcast" sub="Community · every week" right="$5" note="Fri, 6 Nov" />
       </div>
     </div>
   );
@@ -92,7 +92,7 @@ function SkyCard({ sky, name, kind, amount, pose }: { sky: string; name: string;
       <span className={s.skySun} />
       <span className={s.skyKind}>{kind}</span>
       <strong className={s.skyName}>{name}</strong>
-      <span className={s.skyAmount}>{amount} <small>USDC</small></span>
+      <span className={s.skyAmount}>${amount}</span>
       <Water className={s.skyWater}><div className={s.miniFlo}><div className={s.bob}><Flo pose={pose} /></div></div></Water>
     </article>
   );
@@ -114,7 +114,7 @@ export default function Home() {
         </header>
         <div className={s.heroCopy}>
           <h1 id="hero-title">Keep more of what your <em>fans</em> give.</h1>
-          <p>Superfloat gives creators a community page for tips and subscriptions in USDC on Base. We take 1.5%, a fraction of what most platforms keep.</p>
+          <p>Superfloat gives creators a community page where fans tip and subscribe. We take 1.5%, a fraction of what most platforms keep.</p>
           <WaitlistButton source="hero" />
         </div>
         <HeroSea />
@@ -125,7 +125,7 @@ export default function Home() {
           <div className={s.communityInner}>
             <div>
               <h2 className={s.h2}>A home for the people who back you.</h2>
-              <p className={s.lead}>Start a community page for your podcast, channel, studio or club. Fans find you by @name and support you in USDC.</p>
+              <p className={s.lead}>Start a community page for your podcast, channel, studio or club. Fans find you by @name and back you in a few taps.</p>
               <ul className={s.perks}>
                 {PERKS.map((p) => (
                   <li key={p.title}><Icon name={p.icon} /><div><strong>{p.title}</strong><span>{p.body}</span></div></li>
@@ -148,12 +148,12 @@ export default function Home() {
                 <div className={s.tierShell}><Shell name="Bronze" /></div>
                 <span>You are currently in the</span>
                 <strong>Bronze tier</strong>
-                <span>85/100 USDC donated</span>
+                <span>$85 of $100 donated</span>
                 <i className={s.bar}><b style={{ width: "85%" }} /></i>
               </div>
               <p className={s.topHead}>Top contributors</p>
-              <Row id="ana" title="Ana Costa" sub="Platinum tier" right="512 USDC" note="1st" />
-              <Row id="theo" title="Theo Brandt" sub="Gold tier" right="340 USDC" note="2nd" />
+              <Row id="ana" title="Ana Costa" sub="Platinum tier" right="$512" note="1st" />
+              <Row id="theo" title="Theo Brandt" sub="Gold tier" right="$340" note="2nd" />
             </div>
           </div>
         </section>
@@ -169,7 +169,7 @@ export default function Home() {
             </div>
             <SavingsCalculator />
           </div>
-          <p className={s.calcNote}>An estimate, with 1 USDC counted as $1.</p>
+          <p className={s.calcNote}>An estimate.</p>
         </section>
 
         <section id="start" className={s.wallets}>
@@ -191,7 +191,7 @@ export default function Home() {
           <div className={s.moneyInner}>
             <div>
               <h2 className={s.h2}>Fans pay the way they already pay.</h2>
-              <p className={s.lead}>Your fans don&apos;t need to know anything about crypto. They add USDC with a card, bank transfer or Apple Pay, and you withdraw to your bank account when you want to.</p>
+              <p className={s.lead}>Your fans don&apos;t need to know anything about crypto. They add money with a card, bank transfer or Apple Pay, and you withdraw to your bank account when you want to. Balances and payments are in USDC, a digital dollar designed to stay worth $1.</p>
             </div>
             <ul className={s.methods}>
               {METHODS.map((m) => <li key={m.label}><Icon name={m.icon} />{m.label}</li>)}
@@ -206,7 +206,7 @@ export default function Home() {
               <div className={s.tier}>
                 <span>Sam is now a</span>
                 <strong className={s.tierSmall}>Gold tier subscriber of Clay</strong>
-                <span>412/500 USDC donated</span>
+                <span>$412 of $500 donated</span>
                 <i className={s.bar}><b style={{ width: "82%" }} /></i>
               </div>
               <div className={s.feedLine}>
@@ -215,7 +215,7 @@ export default function Home() {
               </div>
               <div className={s.feedLine}>
                 <span className={s.pair}><Thumb id="david" size={36} /><span><Thumb id="clay" size={36} /></span></span>
-                <p><strong>David Smith</strong> gave a 5 USDC tip to <strong>Clay</strong></p>
+                <p><strong>David Smith</strong> gave a $5 tip to <strong>Clay</strong></p>
               </div>
             </div>
             <div>
@@ -231,7 +231,7 @@ export default function Home() {
             <PhoneHome />
             <div>
               <h2 className={s.h2}>Pay friends by @name, too.</h2>
-              <p className={s.lead}>Superfloat is also a wallet for everyday payments. Find anyone by their @username or QR code, then pay or request USDC. Payments between people are free.</p>
+              <p className={s.lead}>Superfloat is also a wallet for everyday payments. Find anyone by their @username or QR code, then pay or request money. Payments between people are free.</p>
             </div>
           </div>
         </section>
