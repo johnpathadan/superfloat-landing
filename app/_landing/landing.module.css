@@ -364,6 +364,12 @@
   font-weight: 600;
 }
 
+.seaFee {
+  color: var(--mist);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
 .seaAmount {
   display: flex;
   align-items: baseline;
@@ -477,14 +483,14 @@
 /* ── How it works ── */
 .how {
   padding: clamp(5rem, 11vw, 9rem) 0;
-  background: var(--deep);
+  background: var(--abyss);
 }
 
 .howInner,
 .communityInner,
 .socialInner,
 .moneyInner,
-.pricingInner {
+.savingsInner {
   display: grid;
   width: min(100% - 2.5rem, 72rem);
   margin: 0 auto;
@@ -686,6 +692,15 @@
   color: var(--mist);
 }
 
+.stepsRow {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem 2.5rem;
+}
+
+.wallets .stepsRow + .lead {
+  margin-top: 2.5rem !important;
+}
+
 /* ── Communities ── */
 .community {
   padding: clamp(5rem, 11vw, 9rem) 0;
@@ -719,6 +734,42 @@
 
 .ladder div:hover .shell {
   transform: translateY(-4px) rotate(-6deg);
+}
+
+.perks {
+  display: grid;
+  margin-top: 2rem !important;
+  gap: 1.125rem;
+  list-style: none;
+}
+
+.perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+.perks .icon {
+  flex: none;
+  padding: 0.5rem;
+  box-sizing: content-box;
+  border-radius: 0.875rem;
+  background: var(--deep);
+  color: #ffb877;
+}
+
+.perks strong,
+.perks span {
+  display: block;
+}
+
+.perks strong {
+  font-weight: 700;
+}
+
+.perks span {
+  color: #3f5a5c;
+  font-size: 1rem;
 }
 
 .note {
@@ -1053,67 +1104,153 @@
   color: #ffb877;
 }
 
-/* ── Pricing ── */
-.pricing {
+/* ── Savings ── */
+.savings {
   padding: clamp(5rem, 11vw, 9rem) 0;
-  background: var(--sand);
-  color: var(--ink);
+  background: var(--deep);
 }
 
-.pricing .lead {
-  color: #3e5a5e;
-}
-
-.prices {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+.fees {
+  display: flex;
+  margin-top: 2rem !important;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
   list-style: none;
 }
 
-.price {
-  display: flex;
-  padding: 1.75rem 1.5rem;
-  flex-direction: column;
-  gap: 0.5rem;
-  border-radius: 1.5rem;
-  background: #fff8ea;
-  box-shadow: inset 0 0 0 2px rgba(16, 40, 44, 0.08);
+.fees li {
+  display: grid;
 }
 
-.priceKind {
-  font-size: 0.9375rem;
-  font-weight: 700;
-}
-
-.priceFigure {
+.fees strong {
   font-family: var(--display);
-  font-size: clamp(3rem, 6vw, 4.25rem);
+  font-size: clamp(2.75rem, 5vw, 3.75rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.03em;
   font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
-  color: var(--water-front);
-}
-
-.priceBody {
-  color: #3e5a5e;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.priceFee {
-  background: var(--deep);
-  box-shadow: none;
-  color: var(--foam);
-}
-
-.priceFee .priceFigure {
   color: #ffb877;
 }
 
-.priceFee .priceBody {
+.fees span {
+  margin-top: 0.375rem;
   color: var(--mist);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.calc {
+  display: grid;
+  width: min(100%, 30rem);
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem;
+  border-radius: 1.75rem;
+  background: var(--sand);
+  color: var(--ink);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.35);
+}
+
+.calcTitle {
+  margin-bottom: 1.25rem !important;
+  font-family: var(--display);
+  font-size: 1.625rem;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variation-settings: "SOFT" 100, "opsz" 40;
+}
+
+.calcField {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.calcField output {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 100, "opsz" 40;
+}
+
+.calcRange {
+  width: 100%;
+  margin: 0.5rem 0 1.25rem;
+  accent-color: var(--buoy);
+  cursor: pointer;
+}
+
+.calcRange:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+.calc .calcHint {
+  margin: -0.75rem 0 1.25rem;
+  color: #3f5a5c;
+  font-size: 0.8125rem;
+}
+
+.calcBars {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid rgba(16, 40, 44, 0.1);
+}
+
+.calcBars span,
+.calcBars strong {
+  display: block;
+}
+
+.calcBars span {
+  color: #3f5a5c;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.calcBars strong {
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.barMuted b {
+  background: #8aa3a6;
+}
+
+/* Doubled up to outrank the .page p reset, which would drop the padding. */
+.calc .calcResult {
+  display: grid;
+  margin-top: 1.5rem;
+  padding: 1rem 1.125rem;
+  border-radius: 1.25rem;
+  background: var(--deep);
+  color: var(--foam);
+}
+
+.calcResult strong {
+  font-family: var(--display);
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 96;
+  color: #ffb877;
+}
+
+.calcResult span {
+  color: var(--mist);
+  font-weight: 600;
+}
+
+.calcNote {
+  width: min(100% - 2.5rem, 72rem);
+  margin: 2.5rem auto 0 !important;
+  color: var(--mist);
+  font-size: 0.875rem;
 }
 
 /* ── Close ── */
@@ -1348,7 +1485,11 @@
   .communityInner,
   .socialInner,
   .moneyInner,
-  .pricingInner {
+  .savingsInner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stepsRow {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1411,10 +1552,6 @@
 
   .seaActions button {
     flex: 1;
-  }
-
-  .prices {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .waitBody {

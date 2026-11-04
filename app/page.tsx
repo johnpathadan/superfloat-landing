@@ -3,6 +3,7 @@ import { Figtree, Fraunces } from "next/font/google";
 
 import { Flo, Icon, Shell, Thumb, Water } from "./_landing/art";
 import { HeroSea } from "./_landing/hero-sea";
+import { SavingsCalculator } from "./_landing/savings-calculator";
 import { WaitlistButton } from "./_landing/waitlist-button";
 import s from "./_landing/landing.module.css";
 import type { IconName } from "./_landing/icons";
@@ -12,29 +13,35 @@ const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", displa
 
 export const metadata: Metadata = {
   title: "Superfloat",
-  description: "Send USDC to anyone by their @name, tip the people you follow and back the communities you love, on Base.",
+  description: "Community pages for creators. Fans tip and subscribe in USDC on Base, and Superfloat takes just 1.5%.",
 };
 
 export const viewport: Viewport = { themeColor: "#FFC389" };
 
-const STEPS = [
-  { title: "Find them by @name", body: "Search for a username or scan their code. No long wallet addresses to copy." },
-  { title: "Slide to send", body: "Pick an amount and slide. Money only moves when you mean it." },
-  { title: "It arrives in USDC", body: "Payments settle in USDC on Base, and every one shows up in your transaction history." },
+const PERKS: { icon: IconName; title: string; body: string }[] = [
+  { icon: "tip", title: "Tips and subscriptions", body: "One-time tips, or weekly and monthly support at an amount each fan chooses." },
+  { icon: "wallet", title: "Its own wallet", body: "Page earnings never mix with your personal money." },
+  { icon: "share", title: "A link and a QR code", body: "Share your page anywhere your fans already follow you." },
 ];
 
 const TIERS = ["Bronze", "Silver", "Gold", "Platinum"];
+
+const FEES = [
+  { figure: "1.5%", label: "on each tip and subscription" },
+  { figure: "Free", label: "for payments between people" },
+];
+
+const STEPS = [
+  { title: "Sign in", body: "Use a social login and your wallet is created for you with Coinbase embedded wallets." },
+  { title: "Create your page", body: "Pick an @name, describe what you make and set your tiers." },
+  { title: "Share your link", body: "Post it in your bio, your videos or your newsletter, and start getting support." },
+];
 
 const METHODS: { icon: IconName; label: string }[] = [
   { icon: "card", label: "Debit or credit card" },
   { icon: "bank", label: "Bank transfer" },
   { icon: "phone", label: "Apple Pay" },
   { icon: "coin", label: "Coinbase balance" },
-];
-
-const PRICES = [
-  { kind: "Payments between people", figure: "Free", body: "Pay or request USDC from your connections at no charge.", fee: false },
-  { kind: "Tips and subscriptions", figure: "1.5%", body: "On each tip and subscription payment to a tips page or community page.", fee: true },
 ];
 
 function Wordmark({ light }: { light?: boolean }) {
@@ -99,43 +106,35 @@ export default function Home() {
         <header className={s.nav}>
           <a href="#top" aria-label="Superfloat home"><Wordmark /></a>
           <nav aria-label="Page sections">
-            <a href="#how">How it works</a>
-            <a href="#communities">Communities</a>
-            <a href="#wallets">Wallets</a>
-            <a href="#pricing">Pricing</a>
+            <a href="#communities">Community pages</a>
+            <a href="#savings">Fees</a>
+            <a href="#start">Get started</a>
+            <a href="#payments">Payments</a>
           </nav>
         </header>
         <div className={s.heroCopy}>
-          <h1 id="hero-title">Send USDC to anyone by their <em>@name</em>.</h1>
-          <p>Superfloat is a social app on Base. Pay your friends, tip the people you follow and back the communities you love.</p>
+          <h1 id="hero-title">Keep more of what your <em>fans</em> give.</h1>
+          <p>Superfloat gives creators a community page for tips and subscriptions in USDC on Base. We take 1.5%, a fraction of what most platforms keep.</p>
           <WaitlistButton source="hero" />
         </div>
         <HeroSea />
       </section>
 
       <main>
-        <section id="how" className={s.how}>
-          <div className={s.howInner}>
-            <PhoneHome />
-            <div>
-              <h2 className={s.h2}>Pay people, not wallet addresses.</h2>
-              <p className={s.lead}>Sign in with a social login and your wallet is created for you with Coinbase embedded wallets. Then pick a unique @username, and anyone can find you.</p>
-              <ol className={s.steps}>
-                {STEPS.map((step) => <li key={step.title}><strong>{step.title}</strong><span>{step.body}</span></li>)}
-              </ol>
-            </div>
-          </div>
-        </section>
-
         <section id="communities" className={s.community}>
           <div className={s.communityInner}>
             <div>
-              <h2 className={s.h2}>Back the people who make things you love.</h2>
-              <p className={s.lead}>Anyone can start a community page and ask for support in USDC. Fans leave a one-time tip or subscribe, and choose how much to give each week or month.</p>
+              <h2 className={s.h2}>A home for the people who back you.</h2>
+              <p className={s.lead}>Start a community page for your podcast, channel, studio or club. Fans find you by @name and support you in USDC.</p>
+              <ul className={s.perks}>
+                {PERKS.map((p) => (
+                  <li key={p.title}><Icon name={p.icon} /><div><strong>{p.title}</strong><span>{p.body}</span></div></li>
+                ))}
+              </ul>
               <div className={s.ladder}>
                 {TIERS.map((tier) => <div key={tier}><Shell name={tier} /><span>{tier}</span></div>)}
               </div>
-              <p className={s.note}>Tiers follow your total contribution, and every tier you complete earns a badge.</p>
+              <p className={s.note}>Set your own tiers. Fans move up as their total support grows and earn a badge for every tier they complete.</p>
             </div>
             <div className={s.pageCard}>
               <div className={s.pageHead}>
@@ -159,15 +158,44 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="wallets" className={s.wallets}>
+        <section id="savings" className={s.savings} aria-labelledby="savings-title">
+          <div className={s.savingsInner}>
+            <div>
+              <h2 id="savings-title" className={s.h2}>Stop paying the platform tax.</h2>
+              <p className={s.lead}>Most creator platforms keep a share of every tip and subscription, often 5 to 12%, and some take 30% or more. Superfloat takes 1.5%, so more of every payment reaches you.</p>
+              <ul className={s.fees}>
+                {FEES.map((f) => <li key={f.label}><strong>{f.figure}</strong><span>{f.label}</span></li>)}
+              </ul>
+            </div>
+            <SavingsCalculator />
+          </div>
+          <p className={s.calcNote}>An estimate, with 1 USDC counted as $1.</p>
+        </section>
+
+        <section id="start" className={s.wallets}>
           <div className={s.walletsCopy}>
-            <h2 className={s.h2}>One sign-in. Separate wallets.</h2>
-            <p className={s.lead}>Your personal wallet stays private. Became popular? Create a tips page so strangers can support you without touching it. Tips and community pages each get their own wallet, and you switch between them from the same login.</p>
+            <h2 className={s.h2}>Your page is live in minutes.</h2>
+            <ol className={`${s.steps} ${s.stepsRow}`}>
+              {STEPS.map((step) => <li key={step.title}><strong>{step.title}</strong><span>{step.body}</span></li>)}
+            </ol>
+            <p className={s.lead}>Every community page and tips page gets its own wallet, separate from your personal one. Switch between them from the same login.</p>
           </div>
           <div className={s.fan}>
             <SkyCard sky={s.morning} kind="Tips page" name="@snehasingh_drummer" amount="1,250" pose="float" />
             <SkyCard sky={s.dusk} kind="Personal" name="@johnpathadan" amount="120" pose="float" />
             <SkyCard sky={s.night} kind="Community page" name="@fieldnotes" amount="342.50" pose="float" />
+          </div>
+        </section>
+
+        <section className={s.money}>
+          <div className={s.moneyInner}>
+            <div>
+              <h2 className={s.h2}>Fans pay the way they already pay.</h2>
+              <p className={s.lead}>Your fans don&apos;t need to know anything about crypto. They add USDC with a card, bank transfer or Apple Pay, and you withdraw to your bank account when you want to.</p>
+            </div>
+            <ul className={s.methods}>
+              {METHODS.map((m) => <li key={m.label}><Icon name={m.icon} />{m.label}</li>)}
+            </ul>
           </div>
         </section>
 
@@ -192,39 +220,19 @@ export default function Home() {
             </div>
             <div>
               <div className={s.hands}><Flo pose="hands" label="Two otters holding hands" /></div>
-              <h2 className={s.h2}>Better with friends.</h2>
-              <p className={s.lead}>Private profiles stay private. To pay or request money from someone, you send a connection request and they accept it. Your Social feed then shows what your connections subscribe to and tip.</p>
+              <h2 className={s.h2}>Fans bring fans.</h2>
+              <p className={s.lead}>When someone tips or subscribes, their connections see it in the Social feed, so word about your page spreads on its own. Private profiles stay private, and only accepted connections see each other&apos;s activity.</p>
             </div>
           </div>
         </section>
 
-        <section className={s.money}>
-          <div className={s.moneyInner}>
+        <section id="payments" className={s.how}>
+          <div className={s.howInner}>
+            <PhoneHome />
             <div>
-              <h2 className={s.h2}>Easy in. Easy out.</h2>
-              <p className={s.lead}>Add USDC the way you already pay, and withdraw to your bank account when you want to. If you bring a wallet you already have, Superfloat only shows the USDC in it.</p>
+              <h2 className={s.h2}>Pay friends by @name, too.</h2>
+              <p className={s.lead}>Superfloat is also a wallet for everyday payments. Find anyone by their @username or QR code, then pay or request USDC. Payments between people are free.</p>
             </div>
-            <ul className={s.methods}>
-              {METHODS.map((m) => <li key={m.label}><Icon name={m.icon} />{m.label}</li>)}
-            </ul>
-          </div>
-        </section>
-
-        <section id="pricing" className={s.pricing} aria-labelledby="pricing-title">
-          <div className={s.pricingInner}>
-            <div>
-              <h2 id="pricing-title" className={s.h2}>Free between friends.</h2>
-              <p className={s.lead}>Superfloat only charges when fans back the people and communities they love.</p>
-            </div>
-            <ul className={s.prices}>
-              {PRICES.map((p) => (
-                <li key={p.kind} className={`${s.price} ${p.fee ? s.priceFee : ""}`}>
-                  <span className={s.priceKind}>{p.kind}</span>
-                  <strong className={s.priceFigure}>{p.figure}</strong>
-                  <span className={s.priceBody}>{p.body}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
       </main>

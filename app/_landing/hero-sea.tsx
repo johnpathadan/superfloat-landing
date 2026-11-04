@@ -6,8 +6,11 @@ import { Flo, Water } from "./art";
 import s from "./landing.module.css";
 
 const DIGIT_EM: Record<string, number> = { "0": 0.647, "1": 0.436, "2": 0.59, "3": 0.542, "4": 0.594, "5": 0.56, "6": 0.596, "7": 0.513, "8": 0.593, "9": 0.598 };
-const fmt = (n: number) => n.toLocaleString("en-US");
-const tide = (balance: number) => Math.min(1, Math.log10(1 + balance) / Math.log10(1001));
+const fmt = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const FEE = 0.015;
+const START = 100;
+// Rounded so the server and browser agree on the last float digit during hydration.
+const tide = (balance: number) => Math.round(Math.min(1, Math.log10(1 + balance) / Math.log10(1001)) * 1e4) / 1e4;
 
 /** Rolling digits. Columns are keyed from the right so 120 → 170 only rolls what changed. */
 function Odometer({ value }: { value: number }) {
@@ -31,15 +34,17 @@ function Odometer({ value }: { value: number }) {
 
 const BUBBLES = Array.from({ length: 14 }, (_, i) => ({ left: 6 + ((i * 37) % 88), size: 6 + ((i * 5) % 12), delay: (i % 5) * 0.09 }));
 
-/** The hero is the app's balance card at full size: the water follows the balance. */
+/** The hero is the app's balance card at full size: the water follows what the creator keeps. */
 export function HeroSea() {
-  const [balance, setBalance] = useState(120);
+  const [given, setGiven] = useState(START);
   const [burst, setBurst] = useState(0);
-  const low = balance > 0 && balance < 60;
+  // Worked in cents so 1.5% never leaves a float tail like 147.74999.
+  const fee = Math.round(given * FEE * 100) / 100;
+  const kept = given - fee;
   return (
     <Water
       className={s.heroWater}
-      style={{ "--rise": tide(balance) } as CSSProperties}
+      style={{ "--rise": tide(kept) } as CSSProperties}
       over={
         <>
           {burst ? (
@@ -49,22 +54,23 @@ export function HeroSea() {
           ) : null}
           <div className={s.seaBar}>
             <div>
-              <p className={s.seaLabel}>Try it. This is a demo balance.</p>
-              <p className={s.seaAmount} role="status" aria-label={`${fmt(balance)} USDC`}>
-                <Odometer value={balance} />
+              <p className={s.seaLabel}>When fans give you {given.toLocaleString("en-US")} USDC, you keep</p>
+              <p className={s.seaAmount} role="status" aria-label={`You keep ${fmt(kept)} USDC. Superfloat gets ${fmt(fee)} USDC.`}>
+                <Odometer value={kept} />
                 <span className={s.seaUnit}>USDC</span>
               </p>
+              <p className={s.seaFee} aria-hidden="true">Superfloat gets {fmt(fee)} USDC</p>
             </div>
             <div className={s.seaActions}>
-              <button type="button" className={s.btnBuoy} disabled={balance >= 1000} onClick={() => { setBalance((b) => b + 50); setBurst((n) => n + 1); }}>Deposit 50</button>
-              <button type="button" className={s.btnFoam} disabled={balance < 30} onClick={() => setBalance((b) => b - 30)}>Send 30</button>
+              <button type="button" className={s.btnBuoy} disabled={given >= 1000} onClick={() => { setGiven((g) => g + 50); setBurst((n) => n + 1); }}>Fan tips 50</button>
+              <button type="button" className={s.btnFoam} disabled={given === START} onClick={() => setGiven(START)}>Start over</button>
             </div>
           </div>
         </>
       }>
       <div className={s.heroFlo}>
         <div className={s.bob}>
-          <Flo pose={balance === 0 ? "sleep" : "float"} ex={low ? "worry" : "open"} />
+          <Flo />
         </div>
       </div>
     </Water>

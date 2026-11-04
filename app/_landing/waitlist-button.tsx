@@ -50,7 +50,7 @@ function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => vo
   return (
     <form className={s.waitBody} action={action}>
       <h2 className={s.waitTitle}>Join the waitlist</h2>
-      <p className={s.waitText}>Be first to send USDC by @name. We'll email you when Superfloat opens.</p>
+      <p className={s.waitText}>Be first to open a community page on Superfloat. Fans are welcome too. We'll email you when we open.</p>
 
       <label className={s.waitField}>
         <span>Email address</span>
