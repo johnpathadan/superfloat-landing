@@ -28,7 +28,7 @@ const PIECES: { icon: IconName; title: string; body: string }[] = [
 
 const QUESTIONS = [
   { q: "Do I need to know anything about crypto?", a: "No. You sign in like any other app, see your balance in dollars, and pay with a tap. Superfloat handles the wallet and the network for you." },
-  { q: "Who pays the network fees?", a: "Coinbase covers the small network fee on every payment, so the only cost is Superfloat's 1.5% on tips and subscriptions. Payments between people are free." },
+  { q: "Who pays the network fees?", a: "Coinbase covers the small network fee on every payment, so the only cost is Superfloat's flat 1.5% on tips and subscriptions, with no hidden or surprise charges. Payments between people are free." },
   { q: "Can other people see my payments?", a: "Base is a public ledger, so payments are recorded with wallet addresses and amounts, but not your name or @handle. In the app, only your accepted connections see your activity in the Social feed." },
   { q: "Why does each page get its own wallet?", a: "So your page earnings never mix with your personal money. Fans paying your page never see your personal wallet, and you switch between wallets from the same login." },
 ];

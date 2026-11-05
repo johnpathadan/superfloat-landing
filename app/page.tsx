@@ -10,7 +10,7 @@ import type { IconName } from "./_landing/icons";
 
 export const metadata: Metadata = {
   title: "Superfloat",
-  description: "Community pages for creators. Fans tip and subscribe in digital dollars, and Superfloat takes just 1.5%.",
+  description: "Community pages for creators. Fans tip and subscribe in digital dollars, and Superfloat takes a flat 1.5% with no hidden charges.",
 };
 
 export const viewport: Viewport = { themeColor: "#FFC389" };
@@ -24,7 +24,7 @@ const PERKS: { icon: IconName; title: string; body: string }[] = [
 const TIERS = ["Bronze", "Silver", "Gold", "Platinum"];
 
 const FEES = [
-  { figure: "1.5%", label: "on each tip and subscription" },
+  { figure: "1.5%", label: "flat, on each tip and subscription" },
   { figure: "Free", label: "for payments between people" },
 ];
 
@@ -99,7 +99,7 @@ export default function Home() {
         <SiteNav />
         <div className={s.heroCopy}>
           <h1 id="hero-title">Keep more of what your <em>fans</em> give.</h1>
-          <p>Superfloat gives creators a community page where fans tip and subscribe. We take 1.5%, a fraction of what most platforms keep.</p>
+          <p>Superfloat gives creators a community page where fans tip and subscribe. We take a flat 1.5% with no hidden or surprise charges, a fraction of what most platforms keep.</p>
           <WaitlistButton source="hero" />
         </div>
         <HeroSea />
@@ -147,7 +147,7 @@ export default function Home() {
           <div className={s.savingsInner}>
             <div>
               <h2 id="savings-title" className={s.h2}>Stop paying the platform tax.</h2>
-              <p className={s.lead}>Most creator platforms keep a share of every tip and subscription, often 5 to 12%, and some take 30% or more. Superfloat takes 1.5%, so more of every payment reaches you.</p>
+              <p className={s.lead}>Most creator platforms keep a share of every tip and subscription, often 5 to 12%, and some take 30% or more. Superfloat takes a flat 1.5% and adds no hidden or surprise charges, so more of every payment reaches you.</p>
               <ul className={s.fees}>
                 {FEES.map((f) => <li key={f.label}><strong>{f.figure}</strong><span>{f.label}</span></li>)}
               </ul>
