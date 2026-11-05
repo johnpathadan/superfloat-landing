@@ -15,27 +15,34 @@ export function Wordmark({ light }: { light?: boolean }) {
   return <span className={`${s.wordmark} ${light ? s.wordmarkLight : ""}`}>superfl<i>o</i>at</span>;
 }
 
-/** Section links point at the home page so they work from every page. */
-export function SiteNav() {
+const PAGES = [
+  { key: "creators", href: "/", label: "For creators" },
+  { key: "individuals", href: "/individuals", label: "For individuals" },
+  { key: "how", href: "/how-it-works", label: "How it works" },
+] as const;
+
+export type PageKey = (typeof PAGES)[number]["key"];
+
+/** The header on every page. `current` underlines the page you're on. */
+export function SiteNav({ current }: { current: PageKey }) {
   return (
     <header className={s.nav}>
       <Link href="/" aria-label="Superfloat home"><Wordmark /></Link>
       <nav aria-label="Site">
-        <a href="/#communities">Community pages</a>
-        <a href="/#savings">Fees</a>
-        <a href="/#start">Get started</a>
-        <Link href="/how-it-works" className={s.navPage}>How it works</Link>
+        {PAGES.map((p) => (
+          <Link key={p.key} href={p.href} aria-current={p.key === current ? "page" : undefined}>{p.label}</Link>
+        ))}
       </nav>
     </header>
   );
 }
 
-export function SiteFooter({ source }: { source: string }) {
+export function SiteFooter({ source, title = "Made to support creators" }: { source: string; title?: string }) {
   return (
     <footer className={s.close}>
       <span className={s.moon} />
       <div className={s.closeCopy}>
-        <h2>Made to support creators</h2>
+        <h2>{title}</h2>
         <p className={s.soon}>Coming soon to iOS and Android. Get early access to hear first.</p>
         <WaitlistButton source={source} />
       </div>

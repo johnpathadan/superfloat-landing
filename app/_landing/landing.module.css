@@ -274,9 +274,14 @@
   font-size: 0.9875rem;
 }
 
-.nav nav a:hover {
+.nav nav a:hover,
+.nav nav a[aria-current="page"] {
   text-decoration: underline;
   text-underline-offset: 0.25em;
+}
+
+.nav nav a[aria-current="page"] {
+  text-decoration-thickness: 2px;
 }
 
 .wordmark {
@@ -765,6 +770,13 @@
   color: #3f5a5c;
 }
 
+.inlineLink {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .pageCard {
   width: min(100%, 27rem);
   margin: 0 auto;
@@ -925,7 +937,8 @@
   transform: rotate(-3deg) translateY(0.75rem);
 }
 
-.sky:nth-child(3) {
+.sky:nth-child(3),
+.sky:nth-child(2):last-child {
   transform: rotate(3deg) translateY(0.75rem);
 }
 
@@ -1225,13 +1238,6 @@
 .calcResult span {
   color: var(--mist);
   font-weight: 600;
-}
-
-.calcNote {
-  width: min(100% - 2.5rem, 72rem);
-  margin: 2.5rem auto 0 !important;
-  color: var(--mist);
-  font-size: 0.875rem;
 }
 
 /* ── How it works page ── */
@@ -1701,14 +1707,22 @@
   }
 
   .sky:nth-child(1),
-  .sky:nth-child(3) {
+  .sky:nth-child(3),
+  .sky:nth-child(2):last-child {
     transform: none;
   }
 }
 
 @media (max-width: 40rem) {
-  .nav nav a:not(.navPage) {
-    display: none;
+  /* All three page links stay on phones; they wrap under the wordmark. */
+  .nav {
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .nav nav {
+    gap: 1.125rem;
+    font-size: 0.9375rem;
   }
 
   .pieceGrid {
