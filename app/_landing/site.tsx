@@ -36,7 +36,7 @@ export function SiteFooter({ source }: { source: string }) {
       <span className={s.moon} />
       <div className={s.closeCopy}>
         <h2>Made to support creators</h2>
-        <p className={s.soon}>Coming soon to iOS and Android. Join the waitlist to hear first.</p>
+        <p className={s.soon}>Coming soon to iOS and Android. Get early access to hear first.</p>
         <WaitlistButton source={source} />
       </div>
       <Water

@@ -7,7 +7,7 @@ import s from "./landing.module.css";
 
 const IDLE: WaitlistState = { status: "idle" };
 
-/** The "Join the waitlist" button and its signup modal. `source` records which part of the page the signup came from. */
+/** The "Get early access" button and its signup modal. `source` records which part of the page the signup came from. */
 export function WaitlistButton({ source }: { source: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   // Bumped on every close, so the next open starts with an empty form.
@@ -16,12 +16,12 @@ export function WaitlistButton({ source }: { source: string }) {
   return (
     <>
       <button type="button" className={`${s.btnBuoy} ${s.waitOpen}`} onClick={() => dialog.current?.showModal()}>
-        Join the waitlist
+        Get early access
       </button>
       <dialog
         ref={dialog}
         className={s.waitDialog}
-        aria-label="Join the waitlist"
+        aria-label="Get early access"
         onClose={() => setRound((r) => r + 1)}
         // A click on the backdrop lands on the dialog itself, not its contents.
         onClick={(e) => e.target === e.currentTarget && e.currentTarget.close()}>
@@ -38,7 +38,7 @@ function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => vo
   if (state.status === "joined" || state.status === "already") {
     return (
       <div className={s.waitBody} role="status">
-        <h2 className={s.waitTitle}>{state.status === "joined" ? "You're on the waitlist" : "You're already on the waitlist"}</h2>
+        <h2 className={s.waitTitle}>{state.status === "joined" ? "You're on the early access list" : "You're already on the early access list"}</h2>
         <p className={s.waitText}>We'll email you when Superfloat opens.</p>
         <div className={s.waitButtons}>
           <button type="button" className={s.btnBuoy} onClick={onCancel} autoFocus>Done</button>
@@ -49,7 +49,7 @@ function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => vo
 
   return (
     <form className={s.waitBody} action={action}>
-      <h2 className={s.waitTitle}>Join the waitlist</h2>
+      <h2 className={s.waitTitle}>Get early access</h2>
       <p className={s.waitText}>Be first to open a community page on Superfloat. Fans are welcome too. We'll email you when we open.</p>
 
       <label className={s.waitField}>
@@ -88,7 +88,7 @@ function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => vo
 
       <div className={s.waitButtons}>
         <button type="button" className={s.btnGhost} onClick={onCancel} disabled={pending}>Cancel</button>
-        <button type="submit" className={s.btnBuoy} disabled={pending}>{pending ? "Joining…" : "Join the waitlist"}</button>
+        <button type="submit" className={s.btnBuoy} disabled={pending}>{pending ? "Signing you up…" : "Get early access"}</button>
       </div>
     </form>
   );
