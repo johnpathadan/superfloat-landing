@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#FFC389" };
 
 const JOURNEY: { icon: IconName; title: string; body: string }[] = [
-  { icon: "clock", title: "Your plan comes due", body: "On Monday, Superfloat checks that your plan is active, the bundle is open and your weekly limit has room." },
-  { icon: "coin", title: "It uses up to $20", body: "Only the amount you approved, once per period, from the USDC in your wallet." },
-  { icon: "repeat", title: "All three stocks are bought at once", body: "$10 of NVIDIA, $5 of Apple and $5 of Alphabet in one transaction. If any of them can't be bought at a fair price, the whole purchase is called off." },
+  { icon: "clock", title: "Your plan comes due", body: "On the weekly or monthly schedule from when you subscribed, Superfloat checks that your plan is active, the bundle is open and your limit has room." },
+  { icon: "coin", title: "It uses up to $4", body: "Only the amount you approved, once per period, from the USDC in your wallet." },
+  { icon: "repeat", title: "All three stocks are bought at once", body: "$2 of NVIDIA, $1 of Apple and $1 of Alphabet in one transaction. If any of them can't be bought at a fair price, the whole purchase is called off." },
   { icon: "wallet", title: "The stocks land in your wallet", body: "Straight to the wallet you sign in with, never a shared account. Your history shows what was bought and for how much." },
 ];
 
@@ -56,8 +56,8 @@ export default function HowItWorks() {
       <main>
         <section className={s.journey} aria-labelledby="journey-title">
           <div className={s.walletsCopy}>
-            <h2 id="journey-title" className={s.h2}>What happens when a $20 Titans plan runs.</h2>
-            <p className={s.lead}>Titans is an example bundle with $2 of NVIDIA, $1 of Apple and $1 of Alphabet in each ticket. This plan buys 5 tickets a week.</p>
+            <h2 id="journey-title" className={s.h2}>What happens when a $4 Titans plan runs.</h2>
+            <p className={s.lead}>Titans is an example bundle with $2 of NVIDIA, $1 of Apple and $1 of Alphabet in each ticket. This plan buys 1 ticket each period.</p>
             <ol className={s.flow}>
               {JOURNEY.map((step) => (
                 <li key={step.title}>
