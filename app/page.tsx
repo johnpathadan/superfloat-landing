@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { Flo, Icon } from "./_landing/art";
 import { BundleCard, FeedCard, PlanCard, WalletCard } from "./_landing/mockups";
-import { Rankings } from "./_landing/rankings";
 import { pageClass, SiteFooter, SiteNav } from "./_landing/site";
 import { TicketHero } from "./_landing/ticket-hero";
 import { WaitlistButton } from "./_landing/waitlist-button";
@@ -68,7 +67,6 @@ export default function Home() {
 
         <section id="rankings" className={s.how} aria-labelledby="rankings-title">
           <div className={s.howInner}>
-            <Rankings />
             <div>
               <h2 id="rankings-title" className={s.h2}>Ranked in the open.</h2>
               <p className={s.lead}>Compare bundles over 24 hours, 7 days, a month, this year or their whole life. Every ranking says what it measures, so a bundle&apos;s track record, a backtest and your own return are never mixed up.</p>

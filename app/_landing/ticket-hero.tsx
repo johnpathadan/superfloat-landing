@@ -9,7 +9,7 @@ import s from "./landing.module.css";
 const DIGIT_EM: Record<string, number> = { "0": 0.647, "1": 0.436, "2": 0.59, "3": 0.542, "4": 0.594, "5": 0.56, "6": 0.596, "7": 0.513, "8": 0.593, "9": 0.598 };
 const fmt = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const TICKET = TITANS.reduce((sum, leg) => sum + leg.usd, 0);
-const START = 5;
+const START = 1;
 const MAX = 50;
 // Rounded so the server and browser agree on the last float digit during hydration.
 const tide = (total: number) => Math.round(Math.min(1, Math.log10(1 + total) / Math.log10(1 + MAX * TICKET)) * 1e4) / 1e4;

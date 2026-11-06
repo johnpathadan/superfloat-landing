@@ -99,7 +99,7 @@ export default function HowItWorks() {
 
         <section className={s.faq} aria-labelledby="faq-title">
           <div className={s.walletsCopy}>
-            <h2 id="faq-title" className={s.h2}>Good questions.</h2>
+            <h2 id="faq-title" className={s.h2}>A few questions answered.</h2>
             <div className={s.faqList}>
               {QUESTIONS.map((item) => (
                 <details key={item.q}>
