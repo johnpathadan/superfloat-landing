@@ -1,38 +1,38 @@
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 
-import { Flo, Icon, Shell, Thumb } from "./_landing/art";
-import { HeroSea } from "./_landing/hero-sea";
-import { FeedCard, METHODS, Row, SkyCard } from "./_landing/mockups";
-import { SavingsCalculator } from "./_landing/savings-calculator";
+import { Flo, Icon } from "./_landing/art";
+import { BundleCard, FeedCard, PlanCard, WalletCard } from "./_landing/mockups";
+import { Rankings } from "./_landing/rankings";
 import { pageClass, SiteFooter, SiteNav } from "./_landing/site";
+import { TicketHero } from "./_landing/ticket-hero";
 import { WaitlistButton } from "./_landing/waitlist-button";
 import s from "./_landing/landing.module.css";
 import type { IconName } from "./_landing/icons";
 
 export const metadata: Metadata = {
   title: "Superfloat",
-  description: "Community pages for creators. Fans tip and subscribe in digital dollars, and Superfloat takes a flat 1.5% with no hidden charges.",
+  description: "Discover stock bundles made by people you follow, invest in them with USDC on a schedule, and keep every stock token in your own wallet.",
 };
 
 export const viewport: Viewport = { themeColor: "#FFC389" };
 
-const PERKS: { icon: IconName; title: string; body: string }[] = [
-  { icon: "tip", title: "Tips and subscriptions", body: "One-time tips, or weekly and monthly support at an amount each fan chooses." },
-  { icon: "wallet", title: "Its own wallet", body: "Page earnings never mix with your personal money." },
-  { icon: "share", title: "A link and a QR code", body: "Share your page anywhere your fans already follow you." },
+const BUNDLE_POINTS: { icon: IconName; title: string; body: string }[] = [
+  { icon: "list", title: "2 to 7 stocks", body: "Each bundle names its stocks and a dollar amount for each one." },
+  { icon: "coin", title: "Priced in tickets", body: "One ticket is the sum of those amounts. Buy as many tickets as you like." },
+  { icon: "clock", title: "History stays put", body: "Every change makes a new version. Old versions and their record are never rewritten." },
 ];
 
-const TIERS = ["Bronze", "Silver", "Gold", "Platinum"];
-
-const FEES = [
-  { figure: "1.5%", label: "flat, on each tip and subscription" },
-  { figure: "$0", label: "network fees for you. Superfloat covers them" },
+const PLAN_STEPS = [
+  { title: "Pick your tickets", body: "Choose a bundle and how many tickets to buy each time." },
+  { title: "Choose how often", body: "Weekly, every two weeks or monthly." },
+  { title: "Approve a limit", body: "Superfloat can spend up to that amount each period, and nothing more." },
 ];
 
-const STEPS = [
-  { title: "Sign in", body: "Use a social login and your wallet is created for you with Coinbase embedded wallets." },
-  { title: "Create your page", body: "Pick an @name, describe what you make and set your tiers." },
-  { title: "Share your link", body: "Post it in your bio, your videos or your newsletter, and start getting support." },
+const WALLET_POINTS: { icon: IconName; title: string; body: string }[] = [
+  { icon: "wallet", title: "No pooled fund", body: "There are no bundle shares. You hold each stock token directly." },
+  { icon: "repeat", title: "Convert to USDC", body: "Sell a stock back to USDC when its market is open, and see the minimum you'll get first." },
+  { icon: "deposit", title: "USDC in, USDC out", body: "Add USDC on Base, and withdraw to an address you choose." },
 ];
 
 export default function Home() {
@@ -40,100 +40,79 @@ export default function Home() {
     <div className={pageClass}>
       <section id="top" className={s.hero} aria-labelledby="hero-title">
         <span className={s.heroSun} />
-        <SiteNav current="creators" />
+        <SiteNav current="invest" />
         <div className={s.heroCopy}>
-          <h1 id="hero-title">Keep more of what your <em>fans</em> give.</h1>
-          <p>Superfloat gives creators a community page where fans tip and subscribe. We take a flat 1.5% with no hidden or surprise charges, a fraction of what most platforms keep.</p>
+          <h1 id="hero-title">Invest in portfolios built by people you <em>follow</em>.</h1>
+          <p>Pick a bundle of stocks, choose how many tickets to buy, and set it to repeat. Every stock lands in your own wallet.</p>
           <WaitlistButton source="hero" />
         </div>
-        <HeroSea />
+        <TicketHero />
       </section>
 
       <main>
-        <section id="communities" className={s.community}>
+        <section id="bundles" className={s.community} aria-labelledby="bundles-title">
           <div className={s.communityInner}>
             <div>
-              <h2 className={s.h2}>A home for the people who back you.</h2>
-              <p className={s.lead}>Start a community page for your podcast, channel, studio or club. Fans find you by @name and back you in a few taps.</p>
+              <h2 id="bundles-title" className={s.h2}>Bundles, made by people.</h2>
+              <p className={s.lead}>Anyone can publish a bundle of stocks they believe in. You can see exactly what&apos;s inside and what each ticket buys before you put in a dollar.</p>
               <ul className={s.perks}>
-                {PERKS.map((p) => (
+                {BUNDLE_POINTS.map((p) => (
                   <li key={p.title}><Icon name={p.icon} /><div><strong>{p.title}</strong><span>{p.body}</span></div></li>
                 ))}
               </ul>
-              <div className={s.ladder}>
-                {TIERS.map((tier) => <div key={tier}><Shell name={tier} /><span>{tier}</span></div>)}
-              </div>
-              <p className={s.note}>Set your own tiers. Fans move up as their total support grows and earn a badge for every tier they complete.</p>
+              <p className={s.note}><Link href="/creators" className={s.inlineLink}>Have a strategy of your own? Create a bundle</Link></p>
             </div>
-            <div className={s.pageCard}>
-              <div className={s.pageHead}>
-                <Thumb id="startup" size={76} />
-                <div><strong>Startup Podcast</strong><span>@startuppodcast</span></div>
-              </div>
-              <p>Weekly podcast covering major startup news</p>
-              <span className={s.subs}>455 subscribers</span>
-              <div className={s.pageBtns}><span>Tip</span><span>Subscribe</span></div>
-              <div className={s.tier}>
-                <div className={s.tierShell}><Shell name="Bronze" /></div>
-                <span>You are currently in the</span>
-                <strong>Bronze tier</strong>
-                <span>$85 of $100 donated</span>
-                <i className={s.bar}><b style={{ width: "85%" }} /></i>
-              </div>
-              <p className={s.topHead}>Top contributors</p>
-              <Row id="ana" title="Ana Costa" sub="Platinum tier" right="$512" note="1st" />
-              <Row id="theo" title="Theo Brandt" sub="Gold tier" right="$340" note="2nd" />
+            <BundleCard />
+          </div>
+        </section>
+
+        <section id="rankings" className={s.how} aria-labelledby="rankings-title">
+          <div className={s.howInner}>
+            <Rankings />
+            <div>
+              <h2 id="rankings-title" className={s.h2}>Ranked in the open.</h2>
+              <p className={s.lead}>Compare bundles over 24 hours, 7 days, a month, this year or their whole life. Every ranking says what it measures, so a bundle&apos;s track record, a backtest and your own return are never mixed up.</p>
+              <p className={s.lead}>Your result depends on when you buy and sell, so it can differ from the bundle&apos;s.</p>
             </div>
           </div>
         </section>
 
-        <section id="savings" className={s.savings} aria-labelledby="savings-title">
-          <div className={s.savingsInner}>
+        <section id="plans" className={s.social} aria-labelledby="plans-title">
+          <div className={s.howInner}>
             <div>
-              <h2 id="savings-title" className={s.h2}>Stop paying the platform tax.</h2>
-              <p className={s.lead}>Most creator platforms keep a share of every tip and subscription, often 5 to 12%, and some take 30% or more. Superfloat takes a flat 1.5% and adds no hidden or surprise charges, so more of every payment reaches you.</p>
-              <ul className={s.fees}>
-                {FEES.map((f) => <li key={f.label}><strong>{f.figure}</strong><span>{f.label}</span></li>)}
+              <h2 id="plans-title" className={s.h2}>Set it, and let it float.</h2>
+              <p className={s.lead}>An investment plan buys your tickets on a schedule, so you don&apos;t have to sign every purchase.</p>
+              <ol className={s.steps}>
+                {PLAN_STEPS.map((step) => <li key={step.title}><strong>{step.title}</strong><span>{step.body}</span></li>)}
+              </ol>
+              <p className={s.lead}>Each run buys every stock in the bundle together, or nothing at all, so you&apos;re never left with half a bundle.</p>
+            </div>
+            <PlanCard />
+          </div>
+        </section>
+
+        <section id="wallet" className={s.money} aria-labelledby="wallet-title">
+          <div className={s.moneyInner}>
+            <WalletCard />
+            <div>
+              <h2 id="wallet-title" className={s.h2}>Every stock lands in your wallet.</h2>
+              <p className={s.lead}>You sign in with email, Google or MetaMask, and Coinbase creates a wallet that only you control. Superfloat never holds your money or your stocks.</p>
+              <ul className={`${s.perks} ${s.perksDark}`}>
+                {WALLET_POINTS.map((p) => (
+                  <li key={p.title}><Icon name={p.icon} /><div><strong>{p.title}</strong><span>{p.body}</span></div></li>
+                ))}
               </ul>
             </div>
-            <SavingsCalculator />
           </div>
         </section>
 
-        <section id="start" className={s.wallets}>
-          <div className={s.walletsCopy}>
-            <h2 className={s.h2}>Your page is live in minutes.</h2>
-            <ol className={`${s.steps} ${s.stepsRow}`}>
-              {STEPS.map((step) => <li key={step.title}><strong>{step.title}</strong><span>{step.body}</span></li>)}
-            </ol>
-            <p className={s.lead}>Every community page and tips page gets its own wallet, separate from your personal one. Switch between them from the same login.</p>
-          </div>
-          <div className={s.fan}>
-            <SkyCard sky={s.morning} kind="Tips page" name="@snehasingh_drummer" amount="1,250" pose="float" />
-            <SkyCard sky={s.dusk} kind="Personal" name="@johnpathadan" amount="120" pose="float" />
-            <SkyCard sky={s.night} kind="Community page" name="@fieldnotes" amount="342.50" pose="float" />
-          </div>
-        </section>
-
-        <section className={s.money}>
-          <div className={s.moneyInner}>
-            <div>
-              <h2 className={s.h2}>Fans pay the way they already pay.</h2>
-              <p className={s.lead}>Your fans don&apos;t need to know anything about crypto. They add money with a card, bank transfer or Apple Pay, and you withdraw to your bank account when you want to. Balances and payments are in USDC, a digital dollar designed to stay worth $1.</p>
-            </div>
-            <ul className={s.methods}>
-              {METHODS.map((m) => <li key={m.label}><Icon name={m.icon} />{m.label}</li>)}
-            </ul>
-          </div>
-        </section>
-
-        <section className={s.social}>
+        <section className={s.social} aria-labelledby="social-title">
           <div className={s.socialInner}>
             <FeedCard />
             <div>
               <div className={s.hands}><Flo pose="hands" label="Two otters holding hands" /></div>
-              <h2 className={s.h2}>Fans bring fans.</h2>
-              <p className={s.lead}>When someone tips or subscribes, their connections see it in the Social feed, so word about your page spreads on its own. Private profiles stay private, and only accepted connections see each other&apos;s activity.</p>
+              <h2 id="social-title" className={s.h2}>Better with friends.</h2>
+              <p className={s.lead}>Follow creators and connect with friends. Your Social feed shows the bundles they start plans in, buy and publish, and only your connections see what you do.</p>
             </div>
           </div>
         </section>

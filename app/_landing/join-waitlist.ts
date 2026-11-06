@@ -3,18 +3,22 @@
 export type WaitlistState = { status: "idle" | "joined" | "already" | "error"; message?: string };
 
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const INTERESTS = new Set(["invest", "create", "both"]);
 const FAILED: WaitlistState = { status: "error", message: "Something went wrong. Please try again in a moment." };
 
-/** Adds an email to the Supabase waitlist. The publishable key can only insert into this table, never read it. */
+/**
+ * Adds an email to the Supabase waitlist. The publishable key can only insert into this table, never read it.
+ * The table's `product` column defaults to "investing", which marks sign-ups from this version of the site.
+ */
 export async function joinWaitlist(_prev: WaitlistState, form: FormData): Promise<WaitlistState> {
   // Bots fill every field, people never see this one.
   if (form.get("company")) return { status: "joined" };
 
   const email = String(form.get("email") ?? "").trim().toLowerCase();
   const source = String(form.get("source") ?? "").slice(0, 40) || null;
-  const platforms = String(form.get("platforms") ?? "").replace(/\s+/g, " ").trim() || null;
+  const picked = String(form.get("interest") ?? "");
+  const interest = INTERESTS.has(picked) ? picked : null;
   if (email.length > 254 || !EMAIL.test(email)) return { status: "error", message: "Please enter a valid email address." };
-  if (platforms && platforms.length > 300) return { status: "error", message: "Please keep the platforms under 300 characters." };
 
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_PUBLISHABLE_KEY;
@@ -27,7 +31,7 @@ export async function joinWaitlist(_prev: WaitlistState, form: FormData): Promis
     const res = await fetch(`${url}/rest/v1/waitlist`, {
       method: "POST",
       headers: { apikey: key, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ email, source, platforms }),
+      body: JSON.stringify({ email, source, interest }),
       cache: "no-store",
     });
     if (res.ok) return { status: "joined" };

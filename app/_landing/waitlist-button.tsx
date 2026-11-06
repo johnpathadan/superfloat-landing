@@ -2,13 +2,24 @@
 
 import { useActionState, useId, useRef, useState } from "react";
 
+import { Flo } from "./art";
 import { joinWaitlist, type WaitlistState } from "./join-waitlist";
 import s from "./landing.module.css";
 
 const IDLE: WaitlistState = { status: "idle" };
 
-/** The "Get early access" button and its signup modal. `source` records which part of the page the signup came from. */
-export function WaitlistButton({ source }: { source: string }) {
+type Interest = "invest" | "create" | "both";
+const INTERESTS: [Interest, string][] = [
+  ["invest", "Invest in bundles"],
+  ["create", "Create bundles"],
+  ["both", "Both"],
+];
+
+/**
+ * The "Get early access" button and its signup modal. `source` records which part of the page the signup came from,
+ * and `interest` pre-selects an answer, such as "create" on the creators page.
+ */
+export function WaitlistButton({ source, interest }: { source: string; interest?: Interest }) {
   const dialog = useRef<HTMLDialogElement>(null);
   // Bumped on every close, so the next open starts with an empty form.
   const [round, setRound] = useState(0);
@@ -25,19 +36,20 @@ export function WaitlistButton({ source }: { source: string }) {
         onClose={() => setRound((r) => r + 1)}
         // A click on the backdrop lands on the dialog itself, not its contents.
         onClick={(e) => e.target === e.currentTarget && e.currentTarget.close()}>
-        <WaitlistForm key={round} source={source} onCancel={() => dialog.current?.close()} />
+        <WaitlistForm key={round} source={source} defaultInterest={interest} onCancel={() => dialog.current?.close()} />
       </dialog>
     </>
   );
 }
 
-function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => void }) {
+function WaitlistForm({ source, defaultInterest, onCancel }: { source: string; defaultInterest?: Interest; onCancel: () => void }) {
   const [state, action, pending] = useActionState(joinWaitlist, IDLE);
   const id = useId();
 
   if (state.status === "joined" || state.status === "already") {
     return (
       <div className={s.waitBody} role="status">
+        <div className={s.waitFlo}><Flo pose="cheer" label="Flo the otter, cheering" /></div>
         <h2 className={s.waitTitle}>{state.status === "joined" ? "You're on the early access list" : "You're already on the early access list"}</h2>
         <p className={s.waitText}>We'll email you when Superfloat opens.</p>
         <div className={s.waitButtons}>
@@ -50,7 +62,7 @@ function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => vo
   return (
     <form className={s.waitBody} action={action}>
       <h2 className={s.waitTitle}>Get early access</h2>
-      <p className={s.waitText}>Be first to open a community page on Superfloat. Fans are welcome too. We'll email you when we open.</p>
+      <p className={s.waitText}>Be among the first to try Superfloat. We'll email you when it opens where you live.</p>
 
       <label className={s.waitField}>
         <span>Email address</span>
@@ -68,18 +80,17 @@ function WaitlistForm({ source, onCancel }: { source: string; onCancel: () => vo
         />
       </label>
 
-      <label className={s.waitField}>
-        <span>Where are you popular? <small>Optional</small></span>
-        <input
-          className={s.waitInput}
-          name="platforms"
-          type="text"
-          placeholder="Instagram, TikTok, YouTube…"
-          maxLength={300}
-          aria-describedby={`${id}-hint`}
-        />
-        <small id={`${id}-hint`} className={s.waitHint}>The social media platforms where you have a following.</small>
-      </label>
+      <fieldset className={s.waitChoice}>
+        <legend>What would you like to do? <small>Optional</small></legend>
+        <div>
+          {INTERESTS.map(([value, text]) => (
+            <label key={value}>
+              <input type="radio" name="interest" value={value} defaultChecked={value === defaultInterest} />
+              <span>{text}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <input type="hidden" name="source" value={source} />
       <input className={s.srOnly} name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />

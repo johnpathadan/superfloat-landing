@@ -13,6 +13,7 @@ import {
   type PersonLook,
   type Pose,
 } from "./parts";
+import { label, STOCKS, type Ticker } from "./stocks";
 import s from "./landing.module.css";
 
 /** The artwork below is fixed strings from parts.ts and never includes user input. */
@@ -99,14 +100,29 @@ const LOOKS: Record<string, PersonLook | CoverLook> = {
   david: { bg: "#6C8CE0", skin: "#E2B48F", hair: "#2E2019", style: "beard", top: "#FCE9C6" },
   ana: { bg: "#9FD8D2", skin: "#E6BB96", hair: "#7B3F21", style: "bob", top: "#7A3E8E" },
   theo: { bg: "#F4D6A0", skin: "#EFC8A8", hair: "#B58A3C", style: "wave", top: "#26547C" },
-  lovecraft: { bg: "#3E2C6B", fg: "#F7C948", g: "book" },
-  startup: { bg: "#F4F8EE", fg: "#0E6670", g: "mic" },
-  clay: { bg: "#B4583A", fg: "#FCE9C6", g: "vase" },
-  borderbox: { bg: "#26547C", fg: "#9FD8D2", g: "box" },
-  fieldnotes: { bg: "#2B2F6B", fg: "#F7C948", g: "note" },
+  // Bundle covers. Bundles are rounded squares, like pages in the app.
+  titans: { bg: "#2B2F6B", fg: "#F7C948", g: "star" },
+  calm: { bg: "#0E6670", fg: "#9FD8D2", g: "waves" },
+  chips: { bg: "#26547C", fg: "#B9D98A", g: "box" },
+  everyday: { bg: "#B4583A", fg: "#FCE9C6", g: "vase" },
+  screens: { bg: "#3E2C6B", fg: "#FF9C8A", g: "play" },
 };
 
-/** People are circles and pages are rounded squares, the same rule as the app. */
+/** A stock as a rounded tile with its ticker. Company logos are never used. */
+export function TickerTile({ ticker, size = 40 }: { ticker: Ticker; size?: number }) {
+  const stock = STOCKS[ticker];
+  const text = label(ticker);
+  return (
+    <span
+      className={s.ticker}
+      style={{ width: size, height: size, borderRadius: size * 0.28, background: stock.color, color: stock.ink, fontSize: size * (text.length > 4 ? 0.22 : 0.27) }}
+      aria-hidden="true">
+      {text}
+    </span>
+  );
+}
+
+/** People are circles and bundles are rounded squares, the same rule as the app. */
 export function Thumb({ id, size = 48 }: { id: keyof typeof LOOKS; size?: number }) {
   const look = LOOKS[id];
   const page = "g" in look;

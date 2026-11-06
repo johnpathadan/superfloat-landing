@@ -12,9 +12,9 @@ const montserrat = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "SuperFloat",
-  description:
-    "SuperFloat brings a billion people on-chain through safety-prioritized investment opportunity.",
+  metadataBase: new URL("https://superfloat.app"),
+  title: "Superfloat",
+  description: "Social stock bundles on Base. Discover a portfolio, invest automatically, and keep every stock in your own wallet.",
 };
 
 export default function RootLayout({

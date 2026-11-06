@@ -1,36 +1,41 @@
 import type { Metadata, Viewport } from "next";
 
-import { Flo, Icon, Thumb, Water } from "../_landing/art";
+import { Flo, Icon, Water } from "../_landing/art";
+import { PlanCard } from "../_landing/mockups";
 import { pageClass, SiteFooter, SiteNav } from "../_landing/site";
 import s from "../_landing/landing.module.css";
 import type { IconName } from "../_landing/icons";
 
 export const metadata: Metadata = {
   title: "How Superfloat works",
-  description: "What happens behind the scenes when a fan supports you on Superfloat, in plain words.",
+  description: "What happens when your investment plan runs, where your stocks go, and what Superfloat can and can't do with your money.",
 };
 
 export const viewport: Viewport = { themeColor: "#FFC389" };
 
 const JOURNEY: { icon: IconName; title: string; body: string }[] = [
-  { icon: "tip", title: "Your fan taps Tip", body: "They choose $10 on your page and confirm. It comes from their Superfloat balance, which they topped up with a card, bank transfer or Apple Pay." },
-  { icon: "send", title: "It travels over Base", body: "The $10 moves as digital dollars on Base, a payment network built by Coinbase. It arrives in seconds, at any hour, with no bank in the middle." },
-  { icon: "wallet", title: "It lands in your page's wallet", body: "$9.85 goes to your community page and $0.15 (1.5%) goes to Superfloat. You see it in your history straight away." },
-  { icon: "withdraw", title: "You cash out when you like", body: "Keep it to pay others, move it to your personal wallet, or withdraw it to your bank account." },
+  { icon: "clock", title: "Your plan comes due", body: "On Monday, Superfloat checks that your plan is active, the bundle is open and your weekly limit has room." },
+  { icon: "coin", title: "It uses up to $20", body: "Only the amount you approved, once per period, from the USDC in your wallet." },
+  { icon: "repeat", title: "All three stocks are bought at once", body: "$10 of NVIDIA, $5 of Apple and $5 of Alphabet in one transaction. If any of them can't be bought at a fair price, the whole purchase is called off." },
+  { icon: "wallet", title: "The stocks land in your wallet", body: "Straight to the wallet you sign in with, never a shared account. Your history shows what was bought and for how much." },
 ];
 
 const PIECES: { icon: IconName; title: string; body: string }[] = [
-  { icon: "shield", title: "Coinbase protects your account", body: "When you sign in with email, Google or a passkey, Coinbase creates your wallet and keeps it safe. There's no secret recovery phrase to write down or lose." },
-  { icon: "coin", title: "USDC is the money", body: "A digital dollar issued by Circle and designed to stay worth $1, so your balance doesn't swing up and down like other crypto." },
-  { icon: "link", title: "Base moves it", body: "A public payment network built by Coinbase. It records every payment, and once a payment goes through it's final, so there are no chargebacks." },
-  { icon: "paw", title: "Superfloat ties it together", body: "Your @name, community pages, tiers, the Social feed and your history. The money itself sits in wallets linked to your login, not in a Superfloat bank account." },
+  { icon: "shield", title: "Coinbase protects your account", body: "When you sign in with email, Google or MetaMask, Coinbase creates a wallet that only you control. There's no recovery phrase to write down." },
+  { icon: "coin", title: "USDC on Base is the money", body: "USDC is a digital dollar issued by Circle and designed to stay worth $1. Base is the public network, built by Coinbase, that moves it." },
+  { icon: "trend", title: "Tokenized stocks are what you buy", body: "Digital tokens that track the price of a company's shares. They're issued by other companies, and each issuer sets what its token gives you." },
+  { icon: "paw", title: "Superfloat ties it together", body: "Bundles, tickets, plans, rankings and the Social feed. It never holds your money or your stocks." },
 ];
 
 const QUESTIONS = [
-  { q: "Do I need to know anything about crypto?", a: "No. You sign in like any other app, see your balance in dollars, and pay with a tap. Superfloat handles the wallet and the network for you." },
-  { q: "Who pays the network fees?", a: "Superfloat covers the small network fee on every payment, so the only cost is Superfloat's flat 1.5% on tips and subscriptions, with no hidden or surprise charges. Payments between people are free." },
-  { q: "Can other people see my payments?", a: "Base is a public ledger, so payments are recorded with wallet addresses and amounts, but not your name or @handle. In the app, only your accepted connections see your activity in the Social feed." },
-  { q: "Why does each page get its own wallet?", a: "So your page earnings never mix with your personal money. Fans paying your page never see your personal wallet, and you switch between wallets from the same login." },
+  { q: "What's a ticket?", a: "Just a way of counting. If a bundle's ticket is $4, buying 5 tickets invests $20, split the way the bundle says. Tickets aren't tokens, and you never hold or trade them. You hold the stocks." },
+  { q: "Do I own the stocks?", a: "You hold the stock tokens yourself, in your own wallet. Superfloat has no pooled fund and no bundle shares. What a token gives you, such as its link to the real share, depends on the company that issues it." },
+  { q: "What if one stock can't be bought?", a: "Then none of them are. A purchase buys every stock in the bundle together, or it's called off and your USDC stays in your wallet." },
+  { q: "Can I sell?", a: "Yes. Convert to USDC sells some or all of a stock back to USDC, when its market is open and a fair price is available. You see the minimum you'll get before you approve it. Selling doesn't stop your plan; pausing or cancelling a plan is a separate choice." },
+  { q: "What if the creator changes the bundle?", a: "Your plan pauses until you approve the new version. Nothing you already bought is sold, and you can cancel instead. If a creator archives a bundle, its plans stop and you keep your stocks." },
+  { q: "What does it cost?", a: "We haven't set pricing yet. We'll show every fee before you invest, and the cost of each purchase before you confirm it." },
+  { q: "Do creators get paid?", a: "Not at launch. We're exploring ways to reward creators, and we'll only add one that's clear, fair and allowed where Superfloat operates." },
+  { q: "Where will Superfloat be available?", a: "We plan to open country by country, starting outside the US, and only where we're allowed to. Join early access and we'll tell you when it opens where you live." },
 ];
 
 export default function HowItWorks() {
@@ -41,7 +46,7 @@ export default function HowItWorks() {
         <SiteNav current="how" />
         <div className={s.heroCopy}>
           <h1 id="how-title">How Superfloat <em>works</em>.</h1>
-          <p>What happens behind the scenes when a fan supports you, in plain words. No crypto knowledge needed.</p>
+          <p>What happens when your investment plan runs, and where your stocks go, in plain words.</p>
         </div>
         <Water className={s.subWater}>
           <div className={s.subFlo}><div className={s.bob}><Flo /></div></div>
@@ -51,8 +56,8 @@ export default function HowItWorks() {
       <main>
         <section className={s.journey} aria-labelledby="journey-title">
           <div className={s.walletsCopy}>
-            <h2 id="journey-title" className={s.h2}>What happens when a fan tips you $10.</h2>
-            <p className={s.lead}>The whole trip, from your fan&apos;s tap to your bank account.</p>
+            <h2 id="journey-title" className={s.h2}>What happens when a $20 Titans plan runs.</h2>
+            <p className={s.lead}>Titans is an example bundle with $2 of NVIDIA, $1 of Apple and $1 of Alphabet in each ticket. This plan buys 5 tickets a week.</p>
             <ol className={s.flow}>
               {JOURNEY.map((step) => (
                 <li key={step.title}>
@@ -81,24 +86,14 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        <section className={s.how} aria-labelledby="subs-title">
+        <section className={s.how} aria-labelledby="limits-title">
           <div className={s.howInner}>
             <div>
-              <h2 id="subs-title" className={s.h2}>Subscriptions that can&apos;t overcharge.</h2>
-              <p className={s.lead}>When a fan subscribes, they approve a limit: who can be paid, how much and how often. Superfloat can collect only that amount, once per week or month. Cancelling removes the permission straight away.</p>
+              <h2 id="limits-title" className={s.h2}>Plans that can&apos;t overspend.</h2>
+              <p className={s.lead}>When you start a plan, you approve a limit on how much can be spent and how often. Superfloat is built so the limit is enforced on Base itself, where even Superfloat can&apos;t go past it, and so bought stocks can only go to your wallet.</p>
+              <p className={s.lead}>Pause a plan, cancel it or remove its permission whenever you like.</p>
             </div>
-            <div className={s.pageCard}>
-              <div className={s.pageHead}>
-                <Thumb id="startup" size={64} />
-                <div><strong>Startup Podcast</strong><span>@startuppodcast</span></div>
-              </div>
-              <p>You&apos;re allowing this page to collect</p>
-              <ul className={s.allow}>
-                <li><span>Up to</span><strong>$5</strong></li>
-                <li><span>How often</span><strong>Every week</strong></li>
-                <li><span>Stop it</span><strong>Cancel anytime</strong></li>
-              </ul>
-            </div>
+            <PlanCard />
           </div>
         </section>
 

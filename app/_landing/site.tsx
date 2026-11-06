@@ -16,8 +16,8 @@ export function Wordmark({ light }: { light?: boolean }) {
 }
 
 const PAGES = [
-  { key: "creators", href: "/", label: "For creators" },
-  { key: "individuals", href: "/individuals", label: "For individuals" },
+  { key: "invest", href: "/", label: "Invest" },
+  { key: "creators", href: "/creators", label: "Create a bundle" },
   { key: "how", href: "/how-it-works", label: "How it works" },
 ] as const;
 
@@ -37,14 +37,28 @@ export function SiteNav({ current }: { current: PageKey }) {
   );
 }
 
-export function SiteFooter({ source, title = "Made to support creators" }: { source: string; title?: string }) {
+export function SiteFooter({
+  source,
+  title = "Discover a portfolio. Invest automatically. Keep every stock.",
+  interest,
+}: {
+  source: string;
+  title?: string;
+  interest?: "invest" | "create" | "both";
+}) {
   return (
     <footer className={s.close}>
       <span className={s.moon} />
       <div className={s.closeCopy}>
         <h2>{title}</h2>
-        <p className={s.soon}>Coming soon to iOS and Android. Get early access to hear first.</p>
-        <WaitlistButton source={source} />
+        <p className={s.soon}>Superfloat isn&apos;t open yet. Get early access to hear first.</p>
+        <WaitlistButton source={source} interest={interest} />
+        <p className={s.fine}>
+          Superfloat is in development and doesn&apos;t accept investments yet. It will open country by country, starting outside the
+          US, only where it&apos;s allowed. Tokenized stocks are digital tokens that track the price of a company&apos;s shares, and what
+          each token gives you depends on the company that issues it. Investing carries risk, and you can get back less than you put
+          in. Every bundle, price and return on this site is an illustration. Nothing here is investment advice.
+        </p>
       </div>
       <Water
         className={s.closeWater}
