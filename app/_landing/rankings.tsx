@@ -30,7 +30,6 @@ export function Rankings() {
     <div className={s.rank}>
       <div className={s.rankHead}>
         <p id={`${id}-title`}>Top bundles</p>
-        <span className={s.badge}>Illustration</span>
       </div>
       <div className={s.periods} role="group" aria-label="Ranking period">
         {PERIODS.map((p) => (

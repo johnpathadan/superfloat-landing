@@ -1525,15 +1525,6 @@
   font-variation-settings: "SOFT" 100, "opsz" 40;
 }
 
-.badge {
-  padding: 0.25rem 0.625rem;
-  border-radius: 0.625rem;
-  background: var(--sand);
-  color: var(--ink);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
 .periods {
   display: flex;
   margin-top: 1rem;
