@@ -11,7 +11,7 @@ import type { IconName } from "./_landing/icons";
 
 export const metadata: Metadata = {
   title: "Superfloat",
-  description: "Discover stock bundles made by people you follow, invest in them with USDC on a schedule, and keep every stock token in your own wallet.",
+  description: "Discover stock bundles built by the community, invest in them with USDC on a schedule, and keep every stock token in your own wallet.",
 };
 
 export const viewport: Viewport = { themeColor: "#FFC389" };
@@ -41,7 +41,7 @@ export default function Home() {
         <span className={s.heroSun} />
         <SiteNav current="invest" />
         <div className={s.heroCopy}>
-          <h1 id="hero-title">Invest in portfolios built by people you <em>follow</em>.</h1>
+          <h1 id="hero-title">Invest in stock bundles built by the <em>community</em>.</h1>
           <p>Pick a bundle of stocks, choose how many tickets to buy, and set it to repeat. Every stock lands in your own wallet.</p>
           <WaitlistButton source="hero" />
         </div>

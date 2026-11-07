@@ -14,7 +14,7 @@ const STEP_MAX = 20;
 /** A try-it-yourself bundle editor. Nothing here is saved or sent anywhere. */
 export function BundleBuilder() {
   const id = useId();
-  const [name, setName] = useState("Titans");
+  const [name, setName] = useState("Sample Bundle");
   const [legs, setLegs] = useState<{ ticker: Ticker; usd: number }[]>(TITANS);
 
   const picked = new Set(legs.map((l) => l.ticker));

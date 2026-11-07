@@ -18,10 +18,12 @@ export function Wordmark({ light }: { light?: boolean }) {
 const PAGES = [
   { key: "invest", href: "/", label: "Invest" },
   { key: "creators", href: "/creators", label: "Create a bundle" },
-  { key: "how", href: "/how-it-works", label: "How it works" },
+  // Hidden from the header for now. The page itself still works at /how-it-works.
+  // { key: "how", href: "/how-it-works", label: "How it works" },
 ] as const;
 
-export type PageKey = (typeof PAGES)[number]["key"];
+/** "how" stays a valid key so the How it works page can still render the header. */
+export type PageKey = (typeof PAGES)[number]["key"] | "how";
 
 /** The header on every page. `current` underlines the page you're on. */
 export function SiteNav({ current }: { current: PageKey }) {

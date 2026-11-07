@@ -7,11 +7,11 @@ const TICKET = TITANS.reduce((sum, leg) => sum + leg.usd, 0);
 /** A bundle as it appears in the app: who made it, what's in it and what one ticket costs. */
 export function BundleCard() {
   return (
-    <div className={s.pageCard} role="img" aria-label="Example bundle Titans by Ana Costa: $2 NVIDIA, $1 Apple and $1 Alphabet per ticket, $4 a ticket">
+    <div className={s.pageCard} role="img" aria-label="Sample Bundle by Ana Costa: $2 NVIDIA, $1 Apple and $1 Alphabet per ticket, $4 a ticket">
       <div className={s.pageHead}>
         <Thumb id="titans" size={68} />
         <div>
-          <strong>Titans</strong>
+          <strong>Sample Bundle</strong>
           <span className={s.byline}><Thumb id="ana" size={20} /> by @anacosta · version 2</span>
         </div>
       </div>
@@ -48,7 +48,7 @@ export function PlanCard() {
     <div className={s.pageCard}>
       <div className={s.pageHead}>
         <Thumb id="titans" size={56} />
-        <div><strong>Weekly plan</strong><span>Titans · version 2</span></div>
+        <div><strong>Weekly plan</strong><span>Sample Bundle · version 2</span></div>
       </div>
       <p>You&apos;re allowing Superfloat to invest for you</p>
       <ul className={s.allow}>
@@ -70,7 +70,7 @@ const HOLDINGS: { ticker: Ticker; units: string; value: number }[] = [
 /** The wallet screen: USDC on top, then only the stocks bought through Superfloat. */
 export function WalletCard() {
   return (
-    <div className={s.walletCard} role="img" aria-label="Example wallet: $86.40 in USDC, plus NVIDIA, Apple and Alphabet tokens bought through a Titans plan, each with a Convert to USDC button">
+    <div className={s.walletCard} role="img" aria-label="Example wallet: $86.40 in USDC, plus NVIDIA, Apple and Alphabet tokens bought through a Sample Bundle plan, each with a Convert to USDC button">
       <div className={`${s.miniCard} ${s.walletSky}`}>
         <span className={s.miniSun} />
         <span className={s.miniLabel}>USDC balance</span>
@@ -81,7 +81,7 @@ export function WalletCard() {
         <span className={s.tile}><Icon name="deposit" size={18} />Deposit USDC</span>
         <span className={s.tile}><Icon name="withdraw" size={18} />Withdraw USDC</span>
       </div>
-      <p className={s.phoneHead}>From your Titans plan</p>
+      <p className={s.phoneHead}>From your Sample Bundle plan</p>
       {HOLDINGS.map((h) => (
         <div key={h.ticker} className={s.row}>
           <TickerTile ticker={h.ticker} size={36} />
@@ -100,14 +100,14 @@ export function FeedCard() {
       <div className={s.feedWho}><Thumb id="sam" size={36} /><strong>Sam Smith</strong><span>2h</span></div>
       <div className={s.tier}>
         <span>Sam started a</span>
-        <strong className={s.tierSmall}>Weekly plan in Titans</strong>
+        <strong className={s.tierSmall}>Weekly plan in Sample Bundle</strong>
         <span className={s.feedStocks}>
           {TITANS.map((leg) => <TickerTile key={leg.ticker} ticker={leg.ticker} size={22} />)}
         </span>
       </div>
       <div className={s.feedLine}>
         <span className={s.pair}><Thumb id="ana" size={36} /><span><Thumb id="titans" size={36} /></span></span>
-        <p><strong>Ana Costa</strong> published version 2 of <strong>Titans</strong></p>
+        <p><strong>Ana Costa</strong> published version 2 of <strong>Sample Bundle</strong></p>
       </div>
       <div className={s.feedLine}>
         <span className={s.pair}><Thumb id="sneha" size={36} /><span><Thumb id="calm" size={36} /></span></span>

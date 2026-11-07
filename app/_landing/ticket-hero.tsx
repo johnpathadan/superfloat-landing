@@ -57,7 +57,7 @@ export function TicketHero() {
           <div className={s.seaBar}>
             <div>
               <p className={s.seaLabel}>
-                {tickets} {tickets === 1 ? "ticket" : "tickets"} of Titans, an example bundle, invests
+                {tickets} {tickets === 1 ? "ticket" : "tickets"} of Sample Bundle invests
               </p>
               <div className={s.seaRow}>
                 <p className={s.seaAmount} role="status" aria-label={`${usd(total)}: ${split}.`}>

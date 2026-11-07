@@ -77,7 +77,7 @@ export default function Creators() {
             <div className={s.pageCard}>
               <div className={s.pageHead}>
                 <Thumb id="titans" size={56} />
-                <div><strong>Titans</strong><span>by @anacosta · version history</span></div>
+                <div><strong>Sample Bundle</strong><span>by @anacosta · version history</span></div>
               </div>
               <ol className={s.versions}>
                 {VERSIONS.map((v) => (

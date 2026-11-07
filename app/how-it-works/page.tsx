@@ -56,8 +56,8 @@ export default function HowItWorks() {
       <main>
         <section className={s.journey} aria-labelledby="journey-title">
           <div className={s.walletsCopy}>
-            <h2 id="journey-title" className={s.h2}>What happens when a $20 Titans plan runs.</h2>
-            <p className={s.lead}>Titans is an example bundle with $2 of NVIDIA, $1 of Apple and $1 of Alphabet in each ticket. This plan buys 5 tickets a week.</p>
+            <h2 id="journey-title" className={s.h2}>What happens when a $20 Sample Bundle plan runs.</h2>
+            <p className={s.lead}>Sample Bundle has $2 of NVIDIA, $1 of Apple and $1 of Alphabet in each ticket. This plan buys 5 tickets a week.</p>
             <ol className={s.flow}>
               {JOURNEY.map((step) => (
                 <li key={step.title}>

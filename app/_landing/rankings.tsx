@@ -11,7 +11,7 @@ type Period = (typeof PERIODS)[number];
 
 /** Made-up bundles and returns for the illustration. None of these numbers are real. */
 const BUNDLES: { id: string; name: string; by: string; stocks: Ticker[]; returns: Record<Period, number> }[] = [
-  { id: "titans", name: "Titans", by: "@anacosta", stocks: ["NVDA", "AAPL", "GOOGL"], returns: { "24H": 0.8, "7D": 2.1, "1M": 4.6, YTD: 18.2, Max: 21.5 } },
+  { id: "titans", name: "Sample Bundle", by: "@anacosta", stocks: ["NVDA", "AAPL", "GOOGL"], returns: { "24H": 0.8, "7D": 2.1, "1M": 4.6, YTD: 18.2, Max: 21.5 } },
   { id: "calm", name: "Calm Compounders", by: "@theobrandt", stocks: ["BRKB", "COST", "KO", "V"], returns: { "24H": 0.2, "7D": 0.9, "1M": 1.8, YTD: 9.4, Max: 14.1 } },
   { id: "chips", name: "Chip Makers", by: "@snehasingh", stocks: ["NVDA", "AMD", "AVGO"], returns: { "24H": -1.4, "7D": 3.2, "1M": 6.9, YTD: 24.7, Max: 19.8 } },
   { id: "everyday", name: "Everyday Brands", by: "@sarat", stocks: ["AMZN", "COST", "KO", "AAPL"], returns: { "24H": 0.4, "7D": -0.6, "1M": 2.2, YTD: 7.1, Max: 8.3 } },
